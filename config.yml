@@ -92,7 +92,7 @@ languages:
 
     menu:
       main:
-        - name: عني
+        - name: عن
           url: about
           weight: 1
         - name: سلاسل
