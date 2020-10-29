@@ -1,0 +1,100 @@
+baseURL: "/"
+title: Amjad Alsharafi
+paginate: 8
+theme: hugo-PaperMod
+defaultContentLanguageInSubdir: true
+defaultContentLanguge: en
+
+googleAnalytics: G-N62ZER16LZ
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  description: "Personal site of Amjad Alsharafi"
+  author: Amjad
+
+  # ShowReadingTime: true
+  defaultTheme: auto
+  ShowShareButtons: true
+  displayFullLangName: true
+
+  socialIcons:
+    - name: twitter
+      url: "https://twitter.com/AmjadAlsharafi5"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/amjad-alshrarafi-346956b2/"
+    - name: github
+      url: "https://github.com/Amjad50"
+
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
+privacy:
+  vimeo:
+    disabled: false
+    simple: true
+
+  twitter:
+    disabled: false
+    enableDNT: true
+    simple: true
+
+  instagram:
+    disabled: false
+    simple: true
+
+  youtube:
+    disabled: false
+    privacyEnhanced: true
+
+services:
+  instagram:
+    disableInlineCSS: true
+  twitter:
+    disableInlineCSS: true
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    menu:
+      main:
+        - name: About
+          url: about
+          weight: 1
+        - name: Series
+          url: series
+          weight: 2
+
+    homeInfoParams:
+      Title: "Hi \U0001F44B"
+      Content: >
+        I'm Amjad Alsharafi. This is my personal website.
+        I write articles about computers, `CTF` writeups, and maybe other stuff.
+  ar:
+    languagedirection: rtl
+    languageName: "العربية"
+    weight: 2
+    title: "أمجد الشرفي"
+    description: "الموقع الشخصي لأمجد الشرفي"
+    author: أمجد
+
+    homeInfoParams:
+      Title: "\U0001F44B أهلاً"
+      Content: >
+        أنا أمجد الشرفي. هذا موقعي الشخصي.
+        أكتب مقالات عن الحاسبات، بعض الحلول لمسابقات CTF ، وممكن أشياء أخرى.
+
+    menu:
+      main:
+        - name: عني
+          url: about
+          weight: 1
+        - name: سلاسل
+          url: series
+          weight: 2
