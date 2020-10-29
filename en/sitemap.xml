@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://amjad50.github.io/en/about/</loc>
+    <lastmod>2020-10-29T10:20:08+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/about/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/series/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/series/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/tags/"
+                />
+  </url>
+  
+</urlset>
