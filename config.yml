@@ -1,4 +1,4 @@
-baseURL: "/"
+baseURL: "https://amjad50.github.io/"
 title: Amjad Alsharafi
 paginate: 8
 theme: hugo-PaperMod
