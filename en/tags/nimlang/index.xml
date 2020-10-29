@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nimlang on Amjad Alsharafi</title>
+    <link>https://amjad50.github.io/en/tags/nimlang/</link>
+    <description>Recent content in nimlang on Amjad Alsharafi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 14 Oct 2020 02:00:00 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/nimlang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>wednesday</title>
+      <link>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</link>
+      <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</guid>
+      <description>Third challenge of FlareOn7</description>
+    </item>
+    
+  </channel>
+</rss>

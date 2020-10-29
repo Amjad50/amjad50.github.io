@@ -3,22 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://amjad50.github.io/en/about/</loc>
-    <lastmod>2020-10-29T10:20:08+03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://amjad50.github.io/ar/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://amjad50.github.io/en/about/"
-                />
-  </url>
-  
-  <url>
     <loc>https://amjad50.github.io/en/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -32,21 +18,43 @@
   </url>
   
   <url>
-    <loc>https://amjad50.github.io/en/categories/</loc>
+    <loc>https://amjad50.github.io/en/tags/autoit3/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/6_-_codeit/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/flareon7/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/series/flareon7-writeups/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/categories/"
+                href="https://amjad50.github.io/ar/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/categories/"
+                href="https://amjad50.github.io/en/posts/"
                 />
   </url>
   
   <url>
     <loc>https://amjad50.github.io/en/series/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -61,6 +69,7 @@
   
   <url>
     <loc>https://amjad50.github.io/en/tags/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -70,6 +79,79 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://amjad50.github.io/en/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/writeup/</loc>
+    <lastmod>2020-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/c#/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/document-malware/</loc>
+    <lastmod>2020-10-14T03:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/4_-_report/</loc>
+    <lastmod>2020-10-14T03:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/tags/nimlang/</loc>
+    <lastmod>2020-10-14T02:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</loc>
+    <lastmod>2020-10-14T02:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/2_-_garbage/</loc>
+    <lastmod>2020-10-14T01:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/flareon7/1_-_fidler/</loc>
+    <lastmod>2020-10-14T00:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/about/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad50.github.io/ar/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad50.github.io/en/categories/"
                 />
   </url>
   
