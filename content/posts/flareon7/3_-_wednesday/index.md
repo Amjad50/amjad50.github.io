@@ -1,6 +1,6 @@
 ---
 title: wednesday
-date: 2020-10-14
+date: 2020-10-14T02:00:00+03:00
 ShowToc: true
 TocOpen: true
 summary: Third challenge of FlareOn7

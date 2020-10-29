@@ -1,6 +1,6 @@
 ---
 title: fidler
-date: 2020-10-14
+date: 2020-10-14T00:00:00+03:00
 ShowToc: true
 TocOpen: true
 summary: First challenge of FlareOn7

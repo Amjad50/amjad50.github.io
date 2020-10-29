@@ -1,6 +1,6 @@
 ---
 title: garbage
-date: 2020-10-14
+date: 2020-10-14T01:00:00+03:00
 ShowToc: true
 TocOpen: true
 summary: Second challenge of FlareOn7
