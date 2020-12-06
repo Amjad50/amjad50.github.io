@@ -5,7 +5,43 @@
     <link>https://amjad50.github.io/en/</link>
     <description>Recent content on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 21 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://amjad50.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Dec 2020 11:30:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2020 - Mobile - SpeedyQuizy</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</link>
+      <pubDate>Sun, 06 Dec 2020 11:30:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</guid>
+      <description>Android mobile app reverse engineering challenge</description>
+    </item>
+    
+    <item>
+      <title>WGMY2020 - RE - kmum</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/kmum/</link>
+      <pubDate>Sun, 06 Dec 2020 09:15:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/kmum/</guid>
+      <description>Third reverse engineering challenge in WGMY2020</description>
+    </item>
+    
+    <item>
+      <title>WGMY2020 - RE - Senang</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/senang/</link>
+      <pubDate>Sun, 06 Dec 2020 07:31:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/senang/</guid>
+      <description>Second reverse engineering challenge in WGMY2020</description>
+    </item>
+    
+    <item>
+      <title>WGMY2020 - RE - babyrev</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/babyrev/</link>
+      <pubDate>Sun, 06 Dec 2020 07:00:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/babyrev/</guid>
+      <description>Simple reversing challenge</description>
+    </item>
+    
     <item>
       <title>codeit</title>
       <link>https://amjad50.github.io/en/posts/flareon7/6_-_codeit/</link>
