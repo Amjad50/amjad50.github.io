@@ -5,7 +5,25 @@
     <link>https://amjad50.github.io/en/tags/wgmy2020/</link>
     <description>Recent content in wgmy2020 on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Dec 2020 11:30:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/wgmy2020/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Dec 2020 20:40:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/wgmy2020/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2020 - misc - Defuse The Bomb!</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/bomb/</link>
+      <pubDate>Sun, 06 Dec 2020 20:40:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/bomb/</guid>
+      <description>Zip chain hell challenge</description>
+    </item>
+    
+    <item>
+      <title>WGMY2020 - Crypto - babyrsa</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</link>
+      <pubDate>Sun, 06 Dec 2020 20:30:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</guid>
+      <description>Simple RSA encryption challenge</description>
+    </item>
+    
     <item>
       <title>WGMY2020 - Mobile - SpeedyQuizy</title>
       <link>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</link>

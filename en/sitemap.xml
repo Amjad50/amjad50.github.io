@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://amjad50.github.io/en/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://amjad50.github.io/en/posts/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>https://amjad50.github.io/en/series/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -49,7 +49,7 @@
   
   <url>
     <loc>https://amjad50.github.io/en/tags/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -64,21 +64,31 @@
   
   <url>
     <loc>https://amjad50.github.io/en/series/wargames-malaysia-2020-writeups/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
   </url>
   
   <url>
     <loc>https://amjad50.github.io/en/tags/wgmy2020/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
   </url>
   
   <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</loc>
-    <lastmod>2020-12-06T11:30:50+03:00</lastmod>
+    <loc>https://amjad50.github.io/en/posts/wgmy2020/bomb/</loc>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
   </url>
   
   <url>
     <loc>https://amjad50.github.io/en/tags/writeup/</loc>
+    <lastmod>2020-12-06T20:40:50+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</loc>
+    <lastmod>2020-12-06T20:30:50+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</loc>
     <lastmod>2020-12-06T11:30:50+03:00</lastmod>
   </url>
   
