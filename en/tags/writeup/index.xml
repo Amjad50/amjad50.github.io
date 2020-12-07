@@ -5,7 +5,16 @@
     <link>https://amjad50.github.io/en/tags/writeup/</link>
     <description>Recent content in writeup on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Dec 2020 20:40:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2020 - Forensic - Lord Kiske&#39;s Server</title>
+      <link>https://amjad50.github.io/en/posts/wgmy2020/forensics/</link>
+      <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
+      
+      <guid>https://amjad50.github.io/en/posts/wgmy2020/forensics/</guid>
+      <description>Many forensic related challenges grouped into one writeup</description>
+    </item>
+    
     <item>
       <title>WGMY2020 - misc - Defuse The Bomb!</title>
       <link>https://amjad50.github.io/en/posts/wgmy2020/bomb/</link>
