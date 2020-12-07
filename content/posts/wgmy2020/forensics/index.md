@@ -247,7 +247,7 @@ Therefore, I calculated the epoch time again of the first second in 4th of Decem
 
 ## Finding the IV
 
-Also, from the request we could also see the **HTTP_USER_AGENT** 
+Also, from the request we could see the **HTTP_USER_AGENT** 
 
 ![%5BAnalysis%5D%20Restoration%20of%20the%20Lord%20Kiske's%20server%208bafa1a8e94542b4a76a0e4707ff8430/Untitled%208.png](%5BAnalysis%5D%20Restoration%20of%20the%20Lord%20Kiske's%20server%208bafa1a8e94542b4a76a0e4707ff8430/Untitled%208.png)
 
