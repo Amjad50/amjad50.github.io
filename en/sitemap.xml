@@ -1,203 +1,147 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://amjad50.github.io/en/</loc>
+    <loc>https://amjad.alsharafi.dev/en/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/"
+                href="https://amjad.alsharafi.dev/ar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/"
+                href="https://amjad.alsharafi.dev/en/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/posts/"
+                href="https://amjad.alsharafi.dev/ar/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/posts/"
+                href="https://amjad.alsharafi.dev/en/posts/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/series/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/series/"
+                href="https://amjad.alsharafi.dev/ar/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/series/"
+                href="https://amjad.alsharafi.dev/en/series/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/tags/"
+                href="https://amjad.alsharafi.dev/ar/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/tags/"
+                href="https://amjad.alsharafi.dev/en/tags/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/series/wargames-malaysia-2020-writeups/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2020-writeups/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/wgmy2020/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/wgmy2020/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/forensics/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/writeup/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/writeup/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/bomb/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</loc>
     <lastmod>2020-12-06T20:40:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</loc>
     <lastmod>2020-12-06T20:30:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</loc>
     <lastmod>2020-12-06T11:30:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/kmum/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</loc>
     <lastmod>2020-12-06T09:15:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/senang/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</loc>
     <lastmod>2020-12-06T07:31:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/wgmy2020/babyrev/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</loc>
     <lastmod>2020-12-06T07:00:50+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/autoit3/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/autoit3/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/6_-_codeit/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/flareon7/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/flareon7/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/series/flareon7-writeups/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/flareon7-writeups/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/c#/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/c#/</loc>
     <lastmod>2020-10-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</loc>
     <lastmod>2020-10-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/document-malware/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/document-malware/</loc>
     <lastmod>2020-10-14T03:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/4_-_report/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</loc>
     <lastmod>2020-10-14T03:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/tags/nimlang/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/nimlang/</loc>
     <lastmod>2020-10-14T02:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</loc>
     <lastmod>2020-10-14T02:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/2_-_garbage/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</loc>
     <lastmod>2020-10-14T01:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/posts/flareon7/1_-_fidler/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</loc>
     <lastmod>2020-10-14T00:00:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/about/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/about/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/about/"
+                href="https://amjad.alsharafi.dev/ar/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/about/"
+                href="https://amjad.alsharafi.dev/en/about/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/en/categories/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/categories/"
+                href="https://amjad.alsharafi.dev/ar/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/categories/"
+                href="https://amjad.alsharafi.dev/en/categories/"
                 />
   </url>
-  
 </urlset>

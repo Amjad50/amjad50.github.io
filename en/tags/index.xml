@@ -2,72 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Amjad Alsharafi</title>
-    <link>https://amjad50.github.io/en/tags/</link>
+    <link>https://amjad.alsharafi.dev/en/tags/</link>
     <description>Recent content in Tags on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate>
+    <atom:link href="https://amjad.alsharafi.dev/en/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>wgmy2020</title>
-      <link>https://amjad50.github.io/en/tags/wgmy2020/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/wgmy2020/</link>
       <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/wgmy2020/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/wgmy2020/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>writeup</title>
-      <link>https://amjad50.github.io/en/tags/writeup/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/writeup/</link>
       <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/writeup/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/writeup/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>autoit3</title>
-      <link>https://amjad50.github.io/en/tags/autoit3/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/autoit3/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/autoit3/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/autoit3/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>flareon7</title>
-      <link>https://amjad50.github.io/en/tags/flareon7/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/flareon7/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/flareon7/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/flareon7/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>C#</title>
-      <link>https://amjad50.github.io/en/tags/c#/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/c#/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/c#/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/c#/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>document malware</title>
-      <link>https://amjad50.github.io/en/tags/document-malware/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/document-malware/</link>
       <pubDate>Wed, 14 Oct 2020 03:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/document-malware/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/document-malware/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>nimlang</title>
-      <link>https://amjad50.github.io/en/tags/nimlang/</link>
+      <link>https://amjad.alsharafi.dev/en/tags/nimlang/</link>
       <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/tags/nimlang/</guid>
+      <guid>https://amjad.alsharafi.dev/en/tags/nimlang/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

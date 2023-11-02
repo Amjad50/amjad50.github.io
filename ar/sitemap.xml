@@ -1,97 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://amjad50.github.io/ar/</loc>
+    <loc>https://amjad.alsharafi.dev/ar/</loc>
     <lastmod>2020-10-29T09:39:43+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/"
+                href="https://amjad.alsharafi.dev/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/"
+                href="https://amjad.alsharafi.dev/ar/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/categories/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/categories/</loc>
     <lastmod>2020-10-29T09:39:43+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/categories/"
+                href="https://amjad.alsharafi.dev/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/categories/"
+                href="https://amjad.alsharafi.dev/ar/categories/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/posts/test/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/posts/test/</loc>
     <lastmod>2020-10-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/posts/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/posts/</loc>
     <lastmod>2020-10-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/posts/"
+                href="https://amjad.alsharafi.dev/en/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/posts/"
+                href="https://amjad.alsharafi.dev/ar/posts/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/tags/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/tags/"
+                href="https://amjad.alsharafi.dev/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/tags/"
+                href="https://amjad.alsharafi.dev/ar/tags/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/series/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/series/"
+                href="https://amjad.alsharafi.dev/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/series/"
+                href="https://amjad.alsharafi.dev/ar/series/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://amjad50.github.io/ar/about/</loc>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/about/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad50.github.io/en/about/"
+                href="https://amjad.alsharafi.dev/en/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad50.github.io/ar/about/"
+                href="https://amjad.alsharafi.dev/ar/about/"
                 />
   </url>
-  
 </urlset>

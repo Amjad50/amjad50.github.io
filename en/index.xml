@@ -2,135 +2,109 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Amjad Alsharafi</title>
-    <link>https://amjad50.github.io/en/</link>
+    <link>https://amjad.alsharafi.dev/en/</link>
     <description>Recent content on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate><atom:link href="https://amjad50.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate>
+    <atom:link href="https://amjad.alsharafi.dev/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WGMY2020 - Forensic - Lord Kiske&#39;s Server</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/forensics/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</link>
       <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/forensics/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</guid>
       <description>Many forensic related challenges grouped into one writeup</description>
     </item>
-    
     <item>
       <title>WGMY2020 - misc - Defuse The Bomb!</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/bomb/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</link>
       <pubDate>Sun, 06 Dec 2020 20:40:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/bomb/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</guid>
       <description>Zip chain hell challenge</description>
     </item>
-    
     <item>
       <title>WGMY2020 - Crypto - babyrsa</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</link>
       <pubDate>Sun, 06 Dec 2020 20:30:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/babyrsa/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</guid>
       <description>Simple RSA encryption challenge</description>
     </item>
-    
     <item>
       <title>WGMY2020 - Mobile - SpeedyQuizy</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</link>
       <pubDate>Sun, 06 Dec 2020 11:30:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/speedyquizy/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</guid>
       <description>Android mobile app reverse engineering challenge</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - kmum</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/kmum/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</link>
       <pubDate>Sun, 06 Dec 2020 09:15:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/kmum/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</guid>
       <description>Third reverse engineering challenge in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - Senang</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/senang/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</link>
       <pubDate>Sun, 06 Dec 2020 07:31:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/senang/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</guid>
       <description>Second reverse engineering challenge in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - babyrev</title>
-      <link>https://amjad50.github.io/en/posts/wgmy2020/babyrev/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</link>
       <pubDate>Sun, 06 Dec 2020 07:00:50 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/wgmy2020/babyrev/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</guid>
       <description>Simple reversing challenge</description>
     </item>
-    
     <item>
       <title>codeit</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/6_-_codeit/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/6_-_codeit/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</guid>
       <description>Sixth challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>TKApp</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</guid>
       <description>Fifth challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>report</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/4_-_report/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</link>
       <pubDate>Wed, 14 Oct 2020 03:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/4_-_report/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</guid>
       <description>Fourth challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>wednesday</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</link>
       <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/3_-_wednesday/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</guid>
       <description>Third challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>garbage</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/2_-_garbage/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</link>
       <pubDate>Wed, 14 Oct 2020 01:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/2_-_garbage/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</guid>
       <description>Second challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>fidler</title>
-      <link>https://amjad50.github.io/en/posts/flareon7/1_-_fidler/</link>
+      <link>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</link>
       <pubDate>Wed, 14 Oct 2020 00:00:00 +0300</pubDate>
-      
-      <guid>https://amjad50.github.io/en/posts/flareon7/1_-_fidler/</guid>
+      <guid>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</guid>
       <description>First challenge of FlareOn7</description>
     </item>
-    
     <item>
       <title>About</title>
-      <link>https://amjad50.github.io/en/about/</link>
+      <link>https://amjad.alsharafi.dev/en/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad50.github.io/en/about/</guid>
+      <guid>https://amjad.alsharafi.dev/en/about/</guid>
       <description>Nothing here for now</description>
     </item>
-    
   </channel>
 </rss>

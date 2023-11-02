@@ -1,299 +1,300 @@
-<!doctype html><html lang=en class=direction-ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>TKApp - Amjad Alsharafi</title><meta name=keywords content="writeup,flareon7,flareon 2020,C#,reverse engineering"><meta name=description content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><meta name=author content="Amjad"><link rel=canonical href=https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/><link href=https://amjad50.github.io/assets/css/stylesheet.min.3548bf7088b742bdd7541e77bb920f9081f681619ac21453daa6d61b81a5d818.css integrity="sha256-NUi/cIi3Qr3XVB53u5IPkIH2gWGawhRT2qbWG4Gl2Bg=" rel="preload stylesheet" as=style><link rel=apple-touch-icon href=https://amjad50.github.io/apple-touch-icon.png><link rel=icon href=https://amjad50.github.io/favicon.ico><meta name=generator content="Hugo 0.79.0"><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','G-N62ZER16LZ','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><meta property="og:title" content="TKApp"><meta property="og:description" content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><meta property="og:type" content="article"><meta property="og:url" content="https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/"><meta property="article:published_time" content="2020-10-15T00:00:00+00:00"><meta property="article:modified_time" content="2020-10-15T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="TKApp"><meta name=twitter:description content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"TKApp","name":"TKApp","description":"Fifth challenge of FlareOn7","keywords":["writeup","flareon7","flareon 2020","C#","reverse engineering"],"articleBody":"Now you can play Flare-On on your watch! As long as you still have an arm left to put a watch on, or emulate the watch's operating system with sophisticated developer tools. $ file TKApp.tpk TKApp.tpk: Zip archive data, at least v2.0 to extract Introduction Looking online, tpk extension is for Samsung watches.\nWhen extracting the content of the zip files, we find some images in res folder, app icon in shared folder, and most importantly we find some dll files in bin folder.\n$ file *.dll ExifLib.Standard.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Tizen.Wearable.CircularUI.Forms.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Tizen.Wearable.CircularUI.Forms.Renderer.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows TKApp.dll: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Core.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Platform.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Platform.Tizen.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Xaml.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Looks like this is built with Xamarin and Tizen.\nFrom the list of dlls we would need to only reverse engineer TKApp.dll.\nI will be using Dnspy since this is a .NET app.\nInformation collecting We start by importing all dlls into Dnspy to fix connections between them, then we start looking into TKApp.dll.\nIn the resources we see one interesting file TKApp.UnlockPage.xaml, which has Entry named \"PasswordEntry\" and a Label named \"flag\", lets keep that in mind.\nIn the App class constructor\npublic App() { App.ImgData = null; if (!App.IsLoggedIn) { TKData.Init(); base.MainPage = new NavigationPage(new UnlockPage()); return; } base.MainPage = new NavigationPage(new MainPage()); } We see the usage of UnlockPage first.\nUnlockPage In this class there is the login handler method to handle password input:\nprivate async void OnLoginButtonClicked(object sender, EventArgs e) { if (this.IsPasswordCorrect(this.passwordEntry.Text)) { App.IsLoggedIn = true; App.Password = this.passwordEntry.Text; base.Navigation.InsertPageBefore(new MainPage(), this); await base.Navigation.PopAsync(); } else { Toast.DisplayText(\"Unlock failed!\", 2000); this.passwordEntry.Text = string.Empty; } } private bool IsPasswordCorrect(string password) { return password == Util.Decode(TKData.Password); } public static byte[] Password = new byte[] {62, 38, 63, 63, 54, 39, 59, 50, 39}; This is also from Util.Decode:\npublic static string Decode(byte[] e) { string text = \"\"; foreach (byte b in e) { text += Convert.ToChar((int)(b ^ 83)).ToString(); } return text; } The password is \"mullethat\", and that is all there is to it for this class, nothing on flag label.\nMainPage There is some stuff here, but two functions seems interesting:\nprivate void PedDataUpdate(object sender, PedometerDataUpdatedEventArgs e) { if (e.StepCount  50U \u0026\u0026 string.IsNullOrEmpty(App.Step)) { App.Step = Application.Current.ApplicationInfo.Metadata[\"its\"]; } if (!string.IsNullOrEmpty(App.Password) \u0026\u0026 !string.IsNullOrEmpty(App.Note) \u0026\u0026 !string.IsNullOrEmpty(App.Step) \u0026\u0026 !string.IsNullOrEmpty(App.Desc)) { HashAlgorithm hashAlgorithm = SHA256.Create(); byte[] bytes = Encoding.ASCII.GetBytes(App.Password + App.Note + App.Step + App.Desc); byte[] first = hashAlgorithm.ComputeHash(bytes); byte[] second = new byte[]{50, 148, 76, 233, 110, 199, 228, 72, 114, 227, 78, 138, 93, 189, 189, 147, 159, 70, 66, 223, 123, 137, 44, 73, 101, 235, 129, 16, 181, 139, 104, 56}; if (first.SequenceEqual(second)) { this.btn.Source = \"img/tiger2.png\"; this.btn.Clicked += this.Clicked; return; } this.btn.Source = \"img/tiger1.png\"; this.btn.Clicked -= this.Clicked; } } private bool GetImage(object sender, EventArgs e) { if (string.IsNullOrEmpty(App.Password) || string.IsNullOrEmpty(App.Note) || string.IsNullOrEmpty(App.Step) || string.IsNullOrEmpty(App.Desc)) { this.btn.Source = \"img/tiger1.png\"; this.btn.Clicked -= this.Clicked; return false; } string text = new string(new char[] { App.Desc[2], App.Password[6], App.Password[4], App.Note[4], App.Note[0], App.Note[17], App.Note[18], App.Note[16], App.Note[11], App.Note[13], App.Note[12], App.Note[15], App.Step[4], App.Password[6], App.Desc[1], App.Password[2], App.Password[2], App.Password[4], App.Note[18], App.Step[2], App.Password[4], App.Note[5], App.Note[4], App.Desc[0], App.Desc[3], App.Note[15], App.Note[8], App.Desc[4], App.Desc[3], App.Note[4], App.Step[2], App.Note[13], App.Note[18], App.Note[18], App.Note[8], App.Note[4], App.Password[0], App.Password[7], App.Note[0], App.Password[4], App.Note[11], App.Password[6], App.Password[4], App.Desc[4], App.Desc[3] }); byte[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text)); byte[] bytes = Encoding.ASCII.GetBytes(\"NoSaltOfTheEarth\"); try { App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes)); return true; } catch (Exception ex) { Toast.DisplayText(\"Failed: \" + ex.Message, 1000); } return false; } Getting App data These two functions depend on App.Password, App.Note, App.Step and App.Desc. We know App.Password and its \"mullethat\".\nFrom PedDataUpdate we know that App.Step can be obtained from Application.Current.ApplicationInfo.Metadata[\"its\"]. Looking tizen-manifest.xml we see\n  key=\"its\" value=\"magic\" /  Next, App.Desc is being set in GalleryPage.IndexPage_CurrentPageChanged\nprivate void IndexPage_CurrentPageChanged(object sender, EventArgs e) { if (base.Children.IndexOf(base.CurrentPage) == 4) { using (ExifReader exifReader = new ExifReader(Path.Combine(Application.Current.DirectoryInfo.Resource, \"gallery\", \"05.jpg\"))) { string desc; if (exifReader.GetTagValuestring(ExifTags.ImageDescription, out desc)) { App.Desc = desc; } return; } } App.Desc = \"\"; } we can get this with:\n$ exiftool res/gallery/05.jpg | grep Description Image Description : water So its \"water\".\nLastly, App.Note. Its being set in TodoPage.SetupList.\npublic class Todo { // ...  public Todo(string Name, string Note, bool Done) { this.Name = Name; this.Note = Note; this.Done = Done; } } private void SetupList() { List list = new List(); if (!this.isHome) { list.Add(new TodoPage.Todo(\"go home\", \"and enable GPS\", false)); } else { TodoPage.Todo[] collection = new TodoPage.Todo[] { new TodoPage.Todo(\"hang out in tiger cage\", \"and survive\", true), new TodoPage.Todo(\"unload Walmart truck\", \"keep steaks for dinner\", false), new TodoPage.Todo(\"yell at staff\", \"maybe fire someone\", false), new TodoPage.Todo(\"say no to drugs\", \"unless it's a drinking day\", false), new TodoPage.Todo(\"listen to some tunes\", \"https://youtu.be/kTmZnQOfAF8\", true) }; list.AddRange(collection); } List list2 = new List(); foreach (TodoPage.Todo todo in list) { if (!todo.Done) { list2.Add(todo); } } this.mylist.ItemsSource = list2; App.Note = list2[0].Note; } So this can be \"and enable GPS\" or \"keep steaks for dinner\", since they are the first that are not done. I assumed that we should be at home, so I worked with \"keep steaks for dinner\". But you can try both, its not much.\nIn the end:\nApp.Password = \"mullethat\"; App.Step = \"magic\"; App.Desc = \"water\"; App.Note = \"keep steaks for dinner\"; In PedDataUpdate, it checks that the values are correct by comparing the SHA256 of App.Password + App.Note + App.Step + App.Desc to some predefined value. Tried it and it matches.\nGetImage function The most important part of that function is:\n// ... // `text` is a selected number of characters from App.Password, App.Note, App.Step and App.Desc byte[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text)); byte[] bytes = Encoding.ASCII.GetBytes(\"NoSaltOfTheEarth\"); try { // `Runtime.Runtime_dll` is the content of a resource named `Runtime.dll`  // its 83392 bytes  App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes)); return true; } // ... And Util.GetString:\npublic static string GetString(byte[] cipherText, byte[] Key, byte[] IV) { string result = null; using (RijndaelManaged rijndaelManaged = new RijndaelManaged()) { rijndaelManaged.Key = Key; rijndaelManaged.IV = IV; ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV); using (MemoryStream memoryStream = new MemoryStream(cipherText)) { using (CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoTransform, 0)) { using (StreamReader streamReader = new StreamReader(cryptoStream)) { result = streamReader.ReadToEnd(); } } } } return result; } This looks like AES decryption. Now we have all the pieces, lets solve it.\nSolution First, we can export the resource Runtime.dll into a file.\nThen we run this:\nusing System; using System.IO; using System.Text; using System.Security.Cryptography; class MainClass { public static string GetString(byte[] cipherText, byte[] Key, byte[] IV) { string result = null; using (RijndaelManaged rijndaelManaged = new RijndaelManaged()) { rijndaelManaged.Key = Key; rijndaelManaged.IV = IV; ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV); using (MemoryStream memoryStream = new MemoryStream(cipherText)) { using (CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoTransform, 0)) { using (StreamReader streamReader = new StreamReader(cryptoStream)) { result = streamReader.ReadToEnd(); } } } } return result; } public static void Main (string[] args) { byte[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(\"the kind of challenges we are gonna make here\")); byte[] bytes = Encoding.ASCII.GetBytes(\"NoSaltOfTheEarth\"); byte[] cihperText = File.ReadAllBytes(\"Runtime.dll\"); byte[] result = Convert.FromBase64String(GetString(cihperText, key, bytes)); File.WriteAllBytes(\"out.jpg\", result); } } Running this, we get an image: Flag:\nn3ver_go1ng_to_recov3r@flare-on.com ","wordCount":"1246","inLanguage":"en","datePublished":"2020-10-15T00:00:00Z","dateModified":"2020-10-15T00:00:00Z","author":{"@type":"Person","name":"Amjad"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://amjad50.github.io/en/posts/flareon7/5_-_tkapp/"},"publisher":{"@type":"Organization","name":"Amjad Alsharafi","logo":{"@type":"ImageObject","url":"https://amjad50.github.io/favicon.ico"}}}</script></head><body class=single id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else{if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}}</script><noscript><style type=text/css>.theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://amjad50.github.io/en/>Amjad Alsharafi</a>
-<span class=logo-switches><span class=theme-toggle><a id=theme-toggle><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></a></span><span class=lang-switch><span>|</span><ul><li><a href=https://amjad50.github.io/ar/ title=العربية aria-label=العربية>العربية</a></li></ul></span></span></div><ul class=menu id=menu onscroll=menu_on_scroll()><li><a href=https://amjad50.github.io/en/about><span>About</span></a></li><li><a href=https://amjad50.github.io/en/series><span>Series</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class=post-title>TKApp</h1><div class=post-meta>October 15, 2020&nbsp;·&nbsp;Amjad</div></header><div class=toc><details open><summary><div class=details>Table of Contents</div></summary><blockquote><ul><li><a href=#introduction>Introduction</a></li><li><a href=#information-collecting>Information collecting</a><ul><li><a href=#unlockpage><code>UnlockPage</code></a></li><li><a href=#mainpage><code>MainPage</code></a><ul><li><a href=#getting-app-data>Getting <code>App</code> data</a></li><li><a href=#getimage-function><code>GetImage</code> function</a></li></ul></li></ul></li><li><a href=#solution>Solution</a></li></ul></blockquote></details></div><div class=post-content><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>Now you can play Flare-On on your watch! As long as you still have an arm left to put a watch on, or emulate the watch&#39;s operating system with sophisticated developer tools.
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>$ file TKApp.tpk
-TKApp.tpk: Zip archive data, at least v2.0 to extract
-</code></pre></div><h2 id=introduction>Introduction</h2><p>Looking online, <code>tpk</code> extension is for Samsung watches.</p><p>When extracting the content of the <code>zip</code> files, we find some images in <code>res</code> folder, app icon in <code>shared</code> folder, and most importantly we find some <code>dll</code> files in <code>bin</code> folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>$ file *.dll
-ExifLib.Standard.dll:                         PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Tizen.Wearable.CircularUI.Forms.dll:          PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Tizen.Wearable.CircularUI.Forms.Renderer.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-TKApp.dll:                                    PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Xamarin.Forms.Core.dll:                       PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Xamarin.Forms.Platform.dll:                   PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Xamarin.Forms.Platform.Tizen.dll:             PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-Xamarin.Forms.Xaml.dll:                       PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
-</code></pre></div><p>Looks like this is built with <a href=https://dotnet.microsoft.com/apps/xamarin>Xamarin</a> and <a href=https://www.tizen.org/>Tizen</a>.</p><p>From the list of <code>dll</code>s we would need to only reverse engineer <code>TKApp.dll</code>.</p><p>I will be using <a href=https://github.com/0xd4d/dnSpy>Dnspy</a> since this is a .NET app.</p><h2 id=information-collecting>Information collecting</h2><p>We start by importing all <code>dll</code>s into <a href=https://github.com/0xd4d/dnSpy>Dnspy</a> to fix connections between them, then we start looking into <code>TKApp.dll</code>.</p><p>In the resources we see one interesting file <code>TKApp.UnlockPage.xaml</code>, which has
-<code>Entry</code> named <code>"PasswordEntry"</code> and a <code>Label</code> named <code>"flag"</code>, lets keep that in mind.</p><p>In the <code>App</code> class constructor</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>public</span> App()
-{
-	App.ImgData = <span style=color:#66d9ef>null</span>;
-	<span style=color:#66d9ef>if</span> (!App.IsLoggedIn)
-	{
-		TKData.Init();
-		<span style=color:#66d9ef>base</span>.MainPage = <span style=color:#66d9ef>new</span> NavigationPage(<span style=color:#66d9ef>new</span> UnlockPage());
-		<span style=color:#66d9ef>return</span>;
-	}
-	<span style=color:#66d9ef>base</span>.MainPage = <span style=color:#66d9ef>new</span> NavigationPage(<span style=color:#66d9ef>new</span> MainPage());
-}
-</code></pre></div><p>We see the usage of <code>UnlockPage</code> first.</p><h3 id=unlockpage><code>UnlockPage</code></h3><p>In this class there is the login handler method to handle password input:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> OnLoginButtonClicked(<span style=color:#66d9ef>object</span> sender, EventArgs e)
-{
-	<span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.IsPasswordCorrect(<span style=color:#66d9ef>this</span>.passwordEntry.Text))
-	{
-		App.IsLoggedIn = <span style=color:#66d9ef>true</span>;
-		App.Password = <span style=color:#66d9ef>this</span>.passwordEntry.Text;
-		<span style=color:#66d9ef>base</span>.Navigation.InsertPageBefore(<span style=color:#66d9ef>new</span> MainPage(), <span style=color:#66d9ef>this</span>);
-		<span style=color:#66d9ef>await</span> <span style=color:#66d9ef>base</span>.Navigation.PopAsync();
-	}
-	<span style=color:#66d9ef>else</span>
-	{
-		Toast.DisplayText(<span style=color:#e6db74>&#34;Unlock failed!&#34;</span>, <span style=color:#ae81ff>2000</span>);
-		<span style=color:#66d9ef>this</span>.passwordEntry.Text = <span style=color:#66d9ef>string</span>.Empty;
-	}
-}
-
-<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> IsPasswordCorrect(<span style=color:#66d9ef>string</span> password)
-{
-	<span style=color:#66d9ef>return</span> password == Util.Decode(TKData.Password);
-}
-
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>byte</span>[] Password = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span>[] {<span style=color:#ae81ff>62</span>, <span style=color:#ae81ff>38</span>, <span style=color:#ae81ff>63</span>, <span style=color:#ae81ff>63</span>, <span style=color:#ae81ff>54</span>, <span style=color:#ae81ff>39</span>, <span style=color:#ae81ff>59</span>, <span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>39</span>};
-</code></pre></div><p>This is also from <code>Util.Decode</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> Decode(<span style=color:#66d9ef>byte</span>[] e)
-{
-	<span style=color:#66d9ef>string</span> text = <span style=color:#e6db74>&#34;&#34;</span>;
-	<span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>byte</span> b <span style=color:#66d9ef>in</span> e)
-	{
-		text += Convert.ToChar((<span style=color:#66d9ef>int</span>)(b ^ <span style=color:#ae81ff>83</span>)).ToString();
-	}
-	<span style=color:#66d9ef>return</span> text;
-}
-</code></pre></div><p>The password is <code>"mullethat"</code>, and that is all there is to it for this class,
-nothing on <code>flag</code> label.</p><h3 id=mainpage><code>MainPage</code></h3><p>There is some stuff here, but two functions seems interesting:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> PedDataUpdate(<span style=color:#66d9ef>object</span> sender, PedometerDataUpdatedEventArgs e)
-{
-    <span style=color:#66d9ef>if</span> (e.StepCount &gt; <span style=color:#ae81ff>50</span>U &amp;&amp; <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step))
-    {
-        App.Step = Application.Current.ApplicationInfo.Metadata[<span style=color:#e6db74>&#34;its&#34;</span>];
-    }
-    <span style=color:#66d9ef>if</span> (!<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Password) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Note) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Desc))
-    {
-        HashAlgorithm hashAlgorithm = SHA256.Create();
-        <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(App.Password + App.Note + App.Step + App.Desc);
-        <span style=color:#66d9ef>byte</span>[] first = hashAlgorithm.ComputeHash(bytes);
-        <span style=color:#66d9ef>byte</span>[] second = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span>[]{<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>148</span>, <span style=color:#ae81ff>76</span>, <span style=color:#ae81ff>233</span>, <span style=color:#ae81ff>110</span>, <span style=color:#ae81ff>199</span>, <span style=color:#ae81ff>228</span>, <span style=color:#ae81ff>72</span>, <span style=color:#ae81ff>114</span>, <span style=color:#ae81ff>227</span>, <span style=color:#ae81ff>78</span>, <span style=color:#ae81ff>138</span>, <span style=color:#ae81ff>93</span>, <span style=color:#ae81ff>189</span>, <span style=color:#ae81ff>189</span>, <span style=color:#ae81ff>147</span>, <span style=color:#ae81ff>159</span>, <span style=color:#ae81ff>70</span>, <span style=color:#ae81ff>66</span>, <span style=color:#ae81ff>223</span>, <span style=color:#ae81ff>123</span>, <span style=color:#ae81ff>137</span>, <span style=color:#ae81ff>44</span>, <span style=color:#ae81ff>73</span>, <span style=color:#ae81ff>101</span>, <span style=color:#ae81ff>235</span>, <span style=color:#ae81ff>129</span>, <span style=color:#ae81ff>16</span>, <span style=color:#ae81ff>181</span>, <span style=color:#ae81ff>139</span>, <span style=color:#ae81ff>104</span>, <span style=color:#ae81ff>56</span>};
-        <span style=color:#66d9ef>if</span> (first.SequenceEqual(second))
-        {
-            <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger2.png&#34;</span>;
-            <span style=color:#66d9ef>this</span>.btn.Clicked += <span style=color:#66d9ef>this</span>.Clicked;
-            <span style=color:#66d9ef>return</span>;
-        }
-        <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger1.png&#34;</span>;
-        <span style=color:#66d9ef>this</span>.btn.Clicked -= <span style=color:#66d9ef>this</span>.Clicked;
-    }
-}
-
-<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> GetImage(<span style=color:#66d9ef>object</span> sender, EventArgs e)
-{
-    <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Password) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Note) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Desc))
-    {
-        <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger1.png&#34;</span>;
-        <span style=color:#66d9ef>this</span>.btn.Clicked -= <span style=color:#66d9ef>this</span>.Clicked;
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-    }
-    <span style=color:#66d9ef>string</span> text = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>string</span>(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[]
-    {
-        App.Desc[<span style=color:#ae81ff>2</span>],
-        App.Password[<span style=color:#ae81ff>6</span>],
-        App.Password[<span style=color:#ae81ff>4</span>],
-        App.Note[<span style=color:#ae81ff>4</span>],
-        App.Note[<span style=color:#ae81ff>0</span>],
-        App.Note[<span style=color:#ae81ff>17</span>],
-        App.Note[<span style=color:#ae81ff>18</span>],
-        App.Note[<span style=color:#ae81ff>16</span>],
-        App.Note[<span style=color:#ae81ff>11</span>],
-        App.Note[<span style=color:#ae81ff>13</span>],
-        App.Note[<span style=color:#ae81ff>12</span>],
-        App.Note[<span style=color:#ae81ff>15</span>],
-        App.Step[<span style=color:#ae81ff>4</span>],
-        App.Password[<span style=color:#ae81ff>6</span>],
-        App.Desc[<span style=color:#ae81ff>1</span>],
-        App.Password[<span style=color:#ae81ff>2</span>],
-        App.Password[<span style=color:#ae81ff>2</span>],
-        App.Password[<span style=color:#ae81ff>4</span>],
-        App.Note[<span style=color:#ae81ff>18</span>],
-        App.Step[<span style=color:#ae81ff>2</span>],
-        App.Password[<span style=color:#ae81ff>4</span>],
-        App.Note[<span style=color:#ae81ff>5</span>],
-        App.Note[<span style=color:#ae81ff>4</span>],
-        App.Desc[<span style=color:#ae81ff>0</span>],
-        App.Desc[<span style=color:#ae81ff>3</span>],
-        App.Note[<span style=color:#ae81ff>15</span>],
-        App.Note[<span style=color:#ae81ff>8</span>],
-        App.Desc[<span style=color:#ae81ff>4</span>],
-        App.Desc[<span style=color:#ae81ff>3</span>],
-        App.Note[<span style=color:#ae81ff>4</span>],
-        App.Step[<span style=color:#ae81ff>2</span>],
-        App.Note[<span style=color:#ae81ff>13</span>],
-        App.Note[<span style=color:#ae81ff>18</span>],
-        App.Note[<span style=color:#ae81ff>18</span>],
-        App.Note[<span style=color:#ae81ff>8</span>],
-        App.Note[<span style=color:#ae81ff>4</span>],
-        App.Password[<span style=color:#ae81ff>0</span>],
-        App.Password[<span style=color:#ae81ff>7</span>],
-        App.Note[<span style=color:#ae81ff>0</span>],
-        App.Password[<span style=color:#ae81ff>4</span>],
-        App.Note[<span style=color:#ae81ff>11</span>],
-        App.Password[<span style=color:#ae81ff>6</span>],
-        App.Password[<span style=color:#ae81ff>4</span>],
-        App.Desc[<span style=color:#ae81ff>4</span>],
-        App.Desc[<span style=color:#ae81ff>3</span>]
-    });
-    <span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text));
-    <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
-    <span style=color:#66d9ef>try</span>
-    {
-        App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes));
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
-    }
-    <span style=color:#66d9ef>catch</span> (Exception ex)
-    {
-        Toast.DisplayText(<span style=color:#e6db74>&#34;Failed: &#34;</span> + ex.Message, <span style=color:#ae81ff>1000</span>);
-    }
-    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-}
-</code></pre></div><h4 id=getting-app-data>Getting <code>App</code> data</h4><p>These two functions depend on <code>App.Password</code>, <code>App.Note</code>, <code>App.Step</code> and <code>App.Desc</code>. We know <code>App.Password</code> and its <code>"mullethat"</code>.</p><p>From <code>PedDataUpdate</code> we know that <code>App.Step</code> can be obtained from
-<code>Application.Current.ApplicationInfo.Metadata["its"]</code>. Looking <code>tizen-manifest.xml</code> we see</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#75715e>&lt;!-- ... --&gt;</span>
-<span style=color:#f92672>&lt;metadata</span> <span style=color:#a6e22e>key=</span><span style=color:#e6db74>&#34;its&#34;</span> <span style=color:#a6e22e>value=</span><span style=color:#e6db74>&#34;magic&#34;</span> <span style=color:#f92672>/&gt;</span>
-<span style=color:#75715e>&lt;!-- ... --&gt;</span>
-</code></pre></div><p>Next, <code>App.Desc</code> is being set in <code>GalleryPage.IndexPage_CurrentPageChanged</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> IndexPage_CurrentPageChanged(<span style=color:#66d9ef>object</span> sender, EventArgs e)
-{
-    <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>base</span>.Children.IndexOf(<span style=color:#66d9ef>base</span>.CurrentPage) == <span style=color:#ae81ff>4</span>)
-    {
-        <span style=color:#66d9ef>using</span> (ExifReader exifReader = <span style=color:#66d9ef>new</span> ExifReader(Path.Combine(Application.Current.DirectoryInfo.Resource, <span style=color:#e6db74>&#34;gallery&#34;</span>, <span style=color:#e6db74>&#34;05.jpg&#34;</span>)))
-        {
-            <span style=color:#66d9ef>string</span> desc;
-            <span style=color:#66d9ef>if</span> (exifReader.GetTagValue&lt;<span style=color:#66d9ef>string</span>&gt;(ExifTags.ImageDescription, <span style=color:#66d9ef>out</span> desc))
-            {
-                App.Desc = desc;
-            }
-            <span style=color:#66d9ef>return</span>;
-        }
-    }
-    App.Desc = <span style=color:#e6db74>&#34;&#34;</span>;
-}
-</code></pre></div><p>we can get this with:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>$ exiftool res/gallery/05.jpg | grep Description
-Image Description               : water
-</code></pre></div><p>So its <code>"water"</code>.</p><p>Lastly, <code>App.Note</code>. Its being set in <code>TodoPage.SetupList</code>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Todo</span> {
-    <span style=color:#75715e>// ...
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> Todo(<span style=color:#66d9ef>string</span> Name, <span style=color:#66d9ef>string</span> Note, <span style=color:#66d9ef>bool</span> Done)
-    {
-        <span style=color:#66d9ef>this</span>.Name = Name;
-        <span style=color:#66d9ef>this</span>.Note = Note;
-        <span style=color:#66d9ef>this</span>.Done = Done;
-    }
-}
-
-<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> SetupList()
-{
-    List&lt;TodoPage.Todo&gt; list = <span style=color:#66d9ef>new</span> List&lt;TodoPage.Todo&gt;();
-    <span style=color:#66d9ef>if</span> (!<span style=color:#66d9ef>this</span>.isHome)
-    {
-        list.Add(<span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;go home&#34;</span>, <span style=color:#e6db74>&#34;and enable GPS&#34;</span>, <span style=color:#66d9ef>false</span>));
-    }
-    <span style=color:#66d9ef>else</span>
-    {
-        TodoPage.Todo[] collection = <span style=color:#66d9ef>new</span> TodoPage.Todo[]
-        {
-            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;hang out in tiger cage&#34;</span>, <span style=color:#e6db74>&#34;and survive&#34;</span>, <span style=color:#66d9ef>true</span>),
-            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;unload Walmart truck&#34;</span>, <span style=color:#e6db74>&#34;keep steaks for dinner&#34;</span>, <span style=color:#66d9ef>false</span>),
-            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;yell at staff&#34;</span>, <span style=color:#e6db74>&#34;maybe fire someone&#34;</span>, <span style=color:#66d9ef>false</span>),
-            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;say no to drugs&#34;</span>, <span style=color:#e6db74>&#34;unless it&#39;s a drinking day&#34;</span>, <span style=color:#66d9ef>false</span>),
-            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;listen to some tunes&#34;</span>, <span style=color:#e6db74>&#34;https://youtu.be/kTmZnQOfAF8&#34;</span>, <span style=color:#66d9ef>true</span>)
-        };
-        list.AddRange(collection);
-    }
-    List&lt;TodoPage.Todo&gt; list2 = <span style=color:#66d9ef>new</span> List&lt;TodoPage.Todo&gt;();
-    <span style=color:#66d9ef>foreach</span> (TodoPage.Todo todo <span style=color:#66d9ef>in</span> list)
-    {
-        <span style=color:#66d9ef>if</span> (!todo.Done)
-        {
-            list2.Add(todo);
-        }
-    }
-    <span style=color:#66d9ef>this</span>.mylist.ItemsSource = list2;
-    App.Note = list2[<span style=color:#ae81ff>0</span>].Note;
-}
-</code></pre></div><p>So this can be <code>"and enable GPS"</code> or <code>"keep steaks for dinner"</code>,
+<!doctype html><html lang=en class=direction-ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>TKApp - Amjad Alsharafi</title>
+<meta name=keywords content="writeup,flareon7,flareon 2020,C#,reverse engineering"><meta name=description content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><meta name=author content="Amjad"><link rel=canonical href=https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/><link href=https://amjad.alsharafi.dev/assets/css/stylesheet.min.fce3746afa57d6eb2c2e93f76c569cf733089396cf5f10c7a659f3b23a65575c.css integrity="sha256-/ON0avpX1ussLpP3bFac9zMIk5bPXxDHplnzsjplV1w=" rel="preload stylesheet" as=style><link rel=apple-touch-icon href=https://amjad.alsharafi.dev/apple-touch-icon.png><link rel=icon href=https://amjad.alsharafi.dev/favicon.ico><meta name=generator content="Hugo 0.120.3"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","G-N62ZER16LZ","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script><meta property="og:title" content="TKApp"><meta property="og:description" content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><meta property="og:type" content="article"><meta property="og:url" content="https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/"><meta property="article:published_time" content="2020-10-15T00:00:00+00:00"><meta property="article:modified_time" content="2020-10-15T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="TKApp"><meta name=twitter:description content="Writeup of 5_-_TKApp, the fifth challenge in FlareOn7"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"TKApp","name":"TKApp","description":"Fifth challenge of FlareOn7","keywords":["writeup","flareon7","flareon 2020","C#","reverse engineering"],"articleBody":"Now you can play Flare-On on your watch! As long as you still have an arm left to put a watch on, or emulate the watch's operating system with sophisticated developer tools. $ file TKApp.tpk TKApp.tpk: Zip archive data, at least v2.0 to extract Introduction Looking online, tpk extension is for Samsung watches.\nWhen extracting the content of the zip files, we find some images in res folder, app icon in shared folder, and most importantly we find some dll files in bin folder.\n$ file *.dll ExifLib.Standard.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Tizen.Wearable.CircularUI.Forms.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Tizen.Wearable.CircularUI.Forms.Renderer.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows TKApp.dll: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Core.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Platform.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Platform.Tizen.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Xamarin.Forms.Xaml.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows Looks like this is built with Xamarin and Tizen.\nFrom the list of dlls we would need to only reverse engineer TKApp.dll.\nI will be using Dnspy since this is a .NET app.\nInformation collecting We start by importing all dlls into Dnspy to fix connections between them, then we start looking into TKApp.dll.\nIn the resources we see one interesting file TKApp.UnlockPage.xaml, which has Entry named \"PasswordEntry\" and a Label named \"flag\", lets keep that in mind.\nIn the App class constructor\npublic App() { App.ImgData = null; if (!App.IsLoggedIn) { TKData.Init(); base.MainPage = new NavigationPage(new UnlockPage()); return; } base.MainPage = new NavigationPage(new MainPage()); } We see the usage of UnlockPage first.\nUnlockPage In this class there is the login handler method to handle password input:\nprivate async void OnLoginButtonClicked(object sender, EventArgs e) { if (this.IsPasswordCorrect(this.passwordEntry.Text)) { App.IsLoggedIn = true; App.Password = this.passwordEntry.Text; base.Navigation.InsertPageBefore(new MainPage(), this); await base.Navigation.PopAsync(); } else { Toast.DisplayText(\"Unlock failed!\", 2000); this.passwordEntry.Text = string.Empty; } } private bool IsPasswordCorrect(string password) { return password == Util.Decode(TKData.Password); } public static byte[] Password = new byte[] {62, 38, 63, 63, 54, 39, 59, 50, 39}; This is also from Util.Decode:\npublic static string Decode(byte[] e) { string text = \"\"; foreach (byte b in e) { text += Convert.ToChar((int)(b ^ 83)).ToString(); } return text; } The password is \"mullethat\", and that is all there is to it for this class, nothing on flag label.\nMainPage There is some stuff here, but two functions seems interesting:\nprivate void PedDataUpdate(object sender, PedometerDataUpdatedEventArgs e) { if (e.StepCount \u003e 50U \u0026\u0026 string.IsNullOrEmpty(App.Step)) { App.Step = Application.Current.ApplicationInfo.Metadata[\"its\"]; } if (!string.IsNullOrEmpty(App.Password) \u0026\u0026 !string.IsNullOrEmpty(App.Note) \u0026\u0026 !string.IsNullOrEmpty(App.Step) \u0026\u0026 !string.IsNullOrEmpty(App.Desc)) { HashAlgorithm hashAlgorithm = SHA256.Create(); byte[] bytes = Encoding.ASCII.GetBytes(App.Password + App.Note + App.Step + App.Desc); byte[] first = hashAlgorithm.ComputeHash(bytes); byte[] second = new byte[]{50, 148, 76, 233, 110, 199, 228, 72, 114, 227, 78, 138, 93, 189, 189, 147, 159, 70, 66, 223, 123, 137, 44, 73, 101, 235, 129, 16, 181, 139, 104, 56}; if (first.SequenceEqual(second)) { this.btn.Source = \"img/tiger2.png\"; this.btn.Clicked += this.Clicked; return; } this.btn.Source = \"img/tiger1.png\"; this.btn.Clicked -= this.Clicked; } } private bool GetImage(object sender, EventArgs e) { if (string.IsNullOrEmpty(App.Password) || string.IsNullOrEmpty(App.Note) || string.IsNullOrEmpty(App.Step) || string.IsNullOrEmpty(App.Desc)) { this.btn.Source = \"img/tiger1.png\"; this.btn.Clicked -= this.Clicked; return false; } string text = new string(new char[] { App.Desc[2], App.Password[6], App.Password[4], App.Note[4], App.Note[0], App.Note[17], App.Note[18], App.Note[16], App.Note[11], App.Note[13], App.Note[12], App.Note[15], App.Step[4], App.Password[6], App.Desc[1], App.Password[2], App.Password[2], App.Password[4], App.Note[18], App.Step[2], App.Password[4], App.Note[5], App.Note[4], App.Desc[0], App.Desc[3], App.Note[15], App.Note[8], App.Desc[4], App.Desc[3], App.Note[4], App.Step[2], App.Note[13], App.Note[18], App.Note[18], App.Note[8], App.Note[4], App.Password[0], App.Password[7], App.Note[0], App.Password[4], App.Note[11], App.Password[6], App.Password[4], App.Desc[4], App.Desc[3] }); byte[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text)); byte[] bytes = Encoding.ASCII.GetBytes(\"NoSaltOfTheEarth\"); try { App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes)); return true; } catch (Exception ex) { Toast.DisplayText(\"Failed: \" + ex.Message, 1000); } return false; } Getting App data These two functions depend on App.Password, App.Note, App.Step and App.Desc. We know App.Password and its \"mullethat\".\nFrom PedDataUpdate we know that App.Step can be obtained from Application.Current.ApplicationInfo.Metadata[\"its\"]. Looking tizen-manifest.xml we see\n","wordCount":"1246","inLanguage":"en","datePublished":"2020-10-15T00:00:00Z","dateModified":"2020-10-15T00:00:00Z","author":{"@type":"Person","name":"Amjad"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/"},"publisher":{"@type":"Organization","name":"Amjad Alsharafi","logo":{"@type":"ImageObject","url":"https://amjad.alsharafi.dev/favicon.ico"}}}</script></head><body class=single id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><noscript><style type=text/css>.theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://amjad.alsharafi.dev/en/>Amjad Alsharafi</a>
+<span class=logo-switches><span class=theme-toggle><a id=theme-toggle><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></a></span><span class=lang-switch><span>|</span><ul><li><a href=https://amjad.alsharafi.dev/ar/ title=العربية aria-label=العربية>العربية</a></li></ul></span></span></div><ul class=menu id=menu onscroll=menu_on_scroll()><li><a href=https://amjad.alsharafi.dev/en/about><span>About</span></a></li><li><a href=https://amjad.alsharafi.dev/en/series><span>Series</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class=post-title>TKApp</h1><div class=post-meta>October 15, 2020&amp;nbsp;·&amp;nbsp;Amjad</div></header><div class=toc><details open><summary><div class=details>Table of Contents</div></summary><blockquote><ul><li><a href=#introduction>Introduction</a></li><li><a href=#information-collecting>Information collecting</a><ul><li><a href=#unlockpage><code>UnlockPage</code></a></li><li><a href=#mainpage><code>MainPage</code></a><ul><li><a href=#getting-app-data>Getting <code>App</code> data</a></li><li><a href=#getimage-function><code>GetImage</code> function</a></li></ul></li></ul></li><li><a href=#solution>Solution</a></li></ul></blockquote></details></div><div class=post-content><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>Now you can play Flare-On on your watch! As long as you still have an arm left to put a watch on, or emulate the watch&#39;s operating system with sophisticated developer tools.
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>$ file TKApp.tpk
+</span></span><span style=display:flex><span>TKApp.tpk: Zip archive data, at least v2.0 to extract
+</span></span></code></pre></div><h2 id=introduction>Introduction</h2><p>Looking online, <code>tpk</code> extension is for Samsung watches.</p><p>When extracting the content of the <code>zip</code> files, we find some images in <code>res</code> folder, app icon in <code>shared</code> folder, and most importantly we find some <code>dll</code> files in <code>bin</code> folder.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>$ file *.dll
+</span></span><span style=display:flex><span>ExifLib.Standard.dll:                         PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Tizen.Wearable.CircularUI.Forms.dll:          PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Tizen.Wearable.CircularUI.Forms.Renderer.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>TKApp.dll:                                    PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Xamarin.Forms.Core.dll:                       PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Xamarin.Forms.Platform.dll:                   PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Xamarin.Forms.Platform.Tizen.dll:             PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span><span style=display:flex><span>Xamarin.Forms.Xaml.dll:                       PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows
+</span></span></code></pre></div><p>Looks like this is built with <a href=https://dotnet.microsoft.com/apps/xamarin>Xamarin</a> and <a href=https://www.tizen.org/>Tizen</a>.</p><p>From the list of <code>dll</code>s we would need to only reverse engineer <code>TKApp.dll</code>.</p><p>I will be using <a href=https://github.com/0xd4d/dnSpy>Dnspy</a> since this is a .NET app.</p><h2 id=information-collecting>Information collecting</h2><p>We start by importing all <code>dll</code>s into <a href=https://github.com/0xd4d/dnSpy>Dnspy</a> to fix connections between them, then we start looking into <code>TKApp.dll</code>.</p><p>In the resources we see one interesting file <code>TKApp.UnlockPage.xaml</code>, which has
+<code>Entry</code> named <code>"PasswordEntry"</code> and a <code>Label</code> named <code>"flag"</code>, lets keep that in mind.</p><p>In the <code>App</code> class constructor</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>public</span> App()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	App.ImgData = <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> (!App.IsLoggedIn)
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		TKData.Init();
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>base</span>.MainPage = <span style=color:#66d9ef>new</span> NavigationPage(<span style=color:#66d9ef>new</span> UnlockPage());
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>base</span>.MainPage = <span style=color:#66d9ef>new</span> NavigationPage(<span style=color:#66d9ef>new</span> MainPage());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We see the usage of <code>UnlockPage</code> first.</p><h3 id=unlockpage><code>UnlockPage</code></h3><p>In this class there is the login handler method to handle password input:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> OnLoginButtonClicked(<span style=color:#66d9ef>object</span> sender, EventArgs e)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.IsPasswordCorrect(<span style=color:#66d9ef>this</span>.passwordEntry.Text))
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		App.IsLoggedIn = <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>		App.Password = <span style=color:#66d9ef>this</span>.passwordEntry.Text;
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>base</span>.Navigation.InsertPageBefore(<span style=color:#66d9ef>new</span> MainPage(), <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>await</span> <span style=color:#66d9ef>base</span>.Navigation.PopAsync();
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		Toast.DisplayText(<span style=color:#e6db74>&#34;Unlock failed!&#34;</span>, <span style=color:#ae81ff>2000</span>);
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.passwordEntry.Text = <span style=color:#66d9ef>string</span>.Empty;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> IsPasswordCorrect(<span style=color:#66d9ef>string</span> password)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> password == Util.Decode(TKData.Password);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>byte</span>[] Password = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span>[] {<span style=color:#ae81ff>62</span>, <span style=color:#ae81ff>38</span>, <span style=color:#ae81ff>63</span>, <span style=color:#ae81ff>63</span>, <span style=color:#ae81ff>54</span>, <span style=color:#ae81ff>39</span>, <span style=color:#ae81ff>59</span>, <span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>39</span>};
+</span></span></code></pre></div><p>This is also from <code>Util.Decode</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> Decode(<span style=color:#66d9ef>byte</span>[] e)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>string</span> text = <span style=color:#e6db74>&#34;&#34;</span>;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>byte</span> b <span style=color:#66d9ef>in</span> e)
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		text += Convert.ToChar((<span style=color:#66d9ef>int</span>)(b ^ <span style=color:#ae81ff>83</span>)).ToString();
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> text;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The password is <code>"mullethat"</code>, and that is all there is to it for this class,
+nothing on <code>flag</code> label.</p><h3 id=mainpage><code>MainPage</code></h3><p>There is some stuff here, but two functions seems interesting:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> PedDataUpdate(<span style=color:#66d9ef>object</span> sender, PedometerDataUpdatedEventArgs e)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (e.StepCount &gt; <span style=color:#ae81ff>50</span>U &amp;&amp; <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step))
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        App.Step = Application.Current.ApplicationInfo.Metadata[<span style=color:#e6db74>&#34;its&#34;</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (!<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Password) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Note) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step) &amp;&amp; !<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Desc))
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        HashAlgorithm hashAlgorithm = SHA256.Create();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(App.Password + App.Note + App.Step + App.Desc);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] first = hashAlgorithm.ComputeHash(bytes);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] second = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span>[]{<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>148</span>, <span style=color:#ae81ff>76</span>, <span style=color:#ae81ff>233</span>, <span style=color:#ae81ff>110</span>, <span style=color:#ae81ff>199</span>, <span style=color:#ae81ff>228</span>, <span style=color:#ae81ff>72</span>, <span style=color:#ae81ff>114</span>, <span style=color:#ae81ff>227</span>, <span style=color:#ae81ff>78</span>, <span style=color:#ae81ff>138</span>, <span style=color:#ae81ff>93</span>, <span style=color:#ae81ff>189</span>, <span style=color:#ae81ff>189</span>, <span style=color:#ae81ff>147</span>, <span style=color:#ae81ff>159</span>, <span style=color:#ae81ff>70</span>, <span style=color:#ae81ff>66</span>, <span style=color:#ae81ff>223</span>, <span style=color:#ae81ff>123</span>, <span style=color:#ae81ff>137</span>, <span style=color:#ae81ff>44</span>, <span style=color:#ae81ff>73</span>, <span style=color:#ae81ff>101</span>, <span style=color:#ae81ff>235</span>, <span style=color:#ae81ff>129</span>, <span style=color:#ae81ff>16</span>, <span style=color:#ae81ff>181</span>, <span style=color:#ae81ff>139</span>, <span style=color:#ae81ff>104</span>, <span style=color:#ae81ff>56</span>};
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (first.SequenceEqual(second))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger2.png&#34;</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.btn.Clicked += <span style=color:#66d9ef>this</span>.Clicked;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger1.png&#34;</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.btn.Clicked -= <span style=color:#66d9ef>this</span>.Clicked;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> GetImage(<span style=color:#66d9ef>object</span> sender, EventArgs e)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Password) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Note) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Step) || <span style=color:#66d9ef>string</span>.IsNullOrEmpty(App.Desc))
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.btn.Source = <span style=color:#e6db74>&#34;img/tiger1.png&#34;</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.btn.Clicked -= <span style=color:#66d9ef>this</span>.Clicked;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>string</span> text = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>string</span>(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[]
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>6</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>17</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>18</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>16</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>11</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>13</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>12</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>15</span>],
+</span></span><span style=display:flex><span>        App.Step[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>6</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>1</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>18</span>],
+</span></span><span style=display:flex><span>        App.Step[<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>5</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>3</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>15</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>8</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>3</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Step[<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>13</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>18</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>18</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>8</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>7</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Note[<span style=color:#ae81ff>11</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>6</span>],
+</span></span><span style=display:flex><span>        App.Password[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>        App.Desc[<span style=color:#ae81ff>3</span>]
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text));
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>catch</span> (Exception ex)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Toast.DisplayText(<span style=color:#e6db74>&#34;Failed: &#34;</span> + ex.Message, <span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=getting-app-data>Getting <code>App</code> data</h4><p>These two functions depend on <code>App.Password</code>, <code>App.Note</code>, <code>App.Step</code> and <code>App.Desc</code>. We know <code>App.Password</code> and its <code>"mullethat"</code>.</p><p>From <code>PedDataUpdate</code> we know that <code>App.Step</code> can be obtained from
+<code>Application.Current.ApplicationInfo.Metadata["its"]</code>. Looking <code>tizen-manifest.xml</code> we see</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;!-- ... --&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;metadata</span> <span style=color:#a6e22e>key=</span><span style=color:#e6db74>&#34;its&#34;</span> <span style=color:#a6e22e>value=</span><span style=color:#e6db74>&#34;magic&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!-- ... --&gt;</span>
+</span></span></code></pre></div><p>Next, <code>App.Desc</code> is being set in <code>GalleryPage.IndexPage_CurrentPageChanged</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> IndexPage_CurrentPageChanged(<span style=color:#66d9ef>object</span> sender, EventArgs e)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>base</span>.Children.IndexOf(<span style=color:#66d9ef>base</span>.CurrentPage) == <span style=color:#ae81ff>4</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>using</span> (ExifReader exifReader = <span style=color:#66d9ef>new</span> ExifReader(Path.Combine(Application.Current.DirectoryInfo.Resource, <span style=color:#e6db74>&#34;gallery&#34;</span>, <span style=color:#e6db74>&#34;05.jpg&#34;</span>)))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>string</span> desc;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (exifReader.GetTagValue&lt;<span style=color:#66d9ef>string</span>&gt;(ExifTags.ImageDescription, <span style=color:#66d9ef>out</span> desc))
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                App.Desc = desc;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    App.Desc = <span style=color:#e6db74>&#34;&#34;</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>we can get this with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>$ exiftool res/gallery/05.jpg | grep Description
+</span></span><span style=display:flex><span>Image Description               : water
+</span></span></code></pre></div><p>So its <code>"water"</code>.</p><p>Lastly, <code>App.Note</code>. Its being set in <code>TodoPage.SetupList</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Todo</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Todo(<span style=color:#66d9ef>string</span> Name, <span style=color:#66d9ef>string</span> Note, <span style=color:#66d9ef>bool</span> Done)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.Name = Name;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.Note = Note;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.Done = Done;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> SetupList()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    List&lt;TodoPage.Todo&gt; list = <span style=color:#66d9ef>new</span> List&lt;TodoPage.Todo&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (!<span style=color:#66d9ef>this</span>.isHome)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        list.Add(<span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;go home&#34;</span>, <span style=color:#e6db74>&#34;and enable GPS&#34;</span>, <span style=color:#66d9ef>false</span>));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        TodoPage.Todo[] collection = <span style=color:#66d9ef>new</span> TodoPage.Todo[]
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;hang out in tiger cage&#34;</span>, <span style=color:#e6db74>&#34;and survive&#34;</span>, <span style=color:#66d9ef>true</span>),
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;unload Walmart truck&#34;</span>, <span style=color:#e6db74>&#34;keep steaks for dinner&#34;</span>, <span style=color:#66d9ef>false</span>),
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;yell at staff&#34;</span>, <span style=color:#e6db74>&#34;maybe fire someone&#34;</span>, <span style=color:#66d9ef>false</span>),
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;say no to drugs&#34;</span>, <span style=color:#e6db74>&#34;unless it&#39;s a drinking day&#34;</span>, <span style=color:#66d9ef>false</span>),
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> TodoPage.Todo(<span style=color:#e6db74>&#34;listen to some tunes&#34;</span>, <span style=color:#e6db74>&#34;https://youtu.be/kTmZnQOfAF8&#34;</span>, <span style=color:#66d9ef>true</span>)
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>        list.AddRange(collection);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    List&lt;TodoPage.Todo&gt; list2 = <span style=color:#66d9ef>new</span> List&lt;TodoPage.Todo&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (TodoPage.Todo todo <span style=color:#66d9ef>in</span> list)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (!todo.Done)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            list2.Add(todo);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.mylist.ItemsSource = list2;
+</span></span><span style=display:flex><span>    App.Note = list2[<span style=color:#ae81ff>0</span>].Note;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>So this can be <code>"and enable GPS"</code> or <code>"keep steaks for dinner"</code>,
 since they are the first that are not done. I assumed that we should be at home,
-so I worked with <code>"keep steaks for dinner"</code>. But you can try both, its not much.</p><p>In the end:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#>App.Password = <span style=color:#e6db74>&#34;mullethat&#34;</span>;
-App.Step = <span style=color:#e6db74>&#34;magic&#34;</span>;
-App.Desc = <span style=color:#e6db74>&#34;water&#34;</span>;
-App.Note = <span style=color:#e6db74>&#34;keep steaks for dinner&#34;</span>;
-</code></pre></div><p>In <code>PedDataUpdate</code>, it checks that the values are correct by comparing
+so I worked with <code>"keep steaks for dinner"</code>. But you can try both, its not much.</p><p>In the end:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span>App.Password = <span style=color:#e6db74>&#34;mullethat&#34;</span>;
+</span></span><span style=display:flex><span>App.Step = <span style=color:#e6db74>&#34;magic&#34;</span>;
+</span></span><span style=display:flex><span>App.Desc = <span style=color:#e6db74>&#34;water&#34;</span>;
+</span></span><span style=display:flex><span>App.Note = <span style=color:#e6db74>&#34;keep steaks for dinner&#34;</span>;
+</span></span></code></pre></div><p>In <code>PedDataUpdate</code>, it checks that the values are correct by comparing
 the <code>SHA256</code> of <code>App.Password + App.Note + App.Step + App.Desc</code>
-to some predefined value. Tried it and it matches.</p><h4 id=getimage-function><code>GetImage</code> function</h4><p>The most important part of that function is:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#75715e>// ...
-</span><span style=color:#75715e>// `text` is a selected number of characters from App.Password, App.Note, App.Step and App.Desc
-</span><span style=color:#75715e></span><span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text));
-<span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
-<span style=color:#66d9ef>try</span>
-{
-    <span style=color:#75715e>// `Runtime.Runtime_dll` is the content of a resource named `Runtime.dll`
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// its 83392 bytes
-</span><span style=color:#75715e></span>    App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes));
-    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
-}
-<span style=color:#75715e>// ...
-</span></code></pre></div><p>And <code>Util.GetString</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetString(<span style=color:#66d9ef>byte</span>[] cipherText, <span style=color:#66d9ef>byte</span>[] Key, <span style=color:#66d9ef>byte</span>[] IV)
-{
-	<span style=color:#66d9ef>string</span> result = <span style=color:#66d9ef>null</span>;
-	<span style=color:#66d9ef>using</span> (RijndaelManaged rijndaelManaged = <span style=color:#66d9ef>new</span> RijndaelManaged())
-	{
-		rijndaelManaged.Key = Key;
-		rijndaelManaged.IV = IV;
-		ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV);
-		<span style=color:#66d9ef>using</span> (MemoryStream memoryStream = <span style=color:#66d9ef>new</span> MemoryStream(cipherText))
-		{
-			<span style=color:#66d9ef>using</span> (CryptoStream cryptoStream = <span style=color:#66d9ef>new</span> CryptoStream(memoryStream, cryptoTransform, <span style=color:#ae81ff>0</span>))
-			{
-				<span style=color:#66d9ef>using</span> (StreamReader streamReader = <span style=color:#66d9ef>new</span> StreamReader(cryptoStream))
-				{
-					result = streamReader.ReadToEnd();
-				}
-			}
-		}
-	}
-	<span style=color:#66d9ef>return</span> result;
-}
-</code></pre></div><p>This looks like <a href=https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>AES</a> decryption. Now we have all the pieces, lets solve it.</p><h2 id=solution>Solution</h2><p>First, we can export the resource <code>Runtime.dll</code> into a file.</p><p>Then we run this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#66d9ef>using</span> System;
-<span style=color:#66d9ef>using</span> System.IO;
-<span style=color:#66d9ef>using</span> System.Text;
-<span style=color:#66d9ef>using</span> System.Security.Cryptography;
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainClass</span> {
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetString(<span style=color:#66d9ef>byte</span>[] cipherText, <span style=color:#66d9ef>byte</span>[] Key, <span style=color:#66d9ef>byte</span>[] IV)
-    {
-        <span style=color:#66d9ef>string</span> result = <span style=color:#66d9ef>null</span>;
-        <span style=color:#66d9ef>using</span> (RijndaelManaged rijndaelManaged = <span style=color:#66d9ef>new</span> RijndaelManaged())
-        {
-            rijndaelManaged.Key = Key;
-            rijndaelManaged.IV = IV;
-            ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV);
-            <span style=color:#66d9ef>using</span> (MemoryStream memoryStream = <span style=color:#66d9ef>new</span> MemoryStream(cipherText))
-            {
-                <span style=color:#66d9ef>using</span> (CryptoStream cryptoStream = <span style=color:#66d9ef>new</span> CryptoStream(memoryStream, cryptoTransform, <span style=color:#ae81ff>0</span>))
-                {
-                    <span style=color:#66d9ef>using</span> (StreamReader streamReader = <span style=color:#66d9ef>new</span> StreamReader(cryptoStream))
-                    {
-                        result = streamReader.ReadToEnd();
-                    }
-                }
-            }
-        }
-        <span style=color:#66d9ef>return</span> result;
-    }
-
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main (<span style=color:#66d9ef>string</span>[] args) {
-        <span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;the kind of challenges we are gonna make here&#34;</span>));
-        <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
-
-    	<span style=color:#66d9ef>byte</span>[] cihperText = File.ReadAllBytes(<span style=color:#e6db74>&#34;Runtime.dll&#34;</span>);
-
-        <span style=color:#66d9ef>byte</span>[] result = Convert.FromBase64String(GetString(cihperText, key, bytes));
-        File.WriteAllBytes(<span style=color:#e6db74>&#34;out.jpg&#34;</span>, result);
-    }
-}
-</code></pre></div><p>Running this, we get an image:
-<img src=flag.jpg alt=flag></p><p>Flag:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>n3ver_go1ng_to_recov3r@flare-on.com
-</code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://amjad50.github.io/en/tags/writeup>writeup</a></li><li><a href=https://amjad50.github.io/en/tags/flareon7>flareon7</a></li><li><a href=https://amjad50.github.io/en/tags/c>C#</a></li></ul><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on twitter" href="https://twitter.com/intent/tweet/?text=TKApp&url=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&hashtags=writeup%2cflareon7%2cC%23"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512h-386.892c-34.524.0-62.554-28.03-62.554-62.554v-386.892c0-34.524 28.029-62.554 62.554-62.554h386.892zm-253.927 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&title=TKApp&summary=TKApp&source=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512h-386.892c-34.524.0-62.554-28.03-62.554-62.554v-386.892c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0v-129.439c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02v-126.056c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768h75.024zm-307.552-334.556c-25.674.0-42.448 16.879-42.448 39.002.0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on reddit" href="https://reddit.com/submit?url=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&title=TKApp"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512h-386.892c-34.524.0-62.554-28.03-62.554-62.554v-386.892c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zm-119.474 108.193c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zm-160.386-29.702c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978v-192.915h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554v-386.892c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on whatsapp" href="https://api.whatsapp.com/send?text=TKApp%20-%20https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512h-386.892c-34.524.0-62.554-28.03-62.554-62.554v-386.892c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23-13.314-11.876-22.304-26.542-24.916-31.026s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on telegram" href="https://telegram.me/share/url?text=TKApp&url=https%3a%2f%2famjad50.github.io%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47A3.38 3.38.0 0126.49 29.86zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2020 <a href=https://amjad50.github.io/en/>Amjad Alsharafi</a></span>
+to some predefined value. Tried it and it matches.</p><h4 id=getimage-function><code>GetImage</code> function</h4><p>The most important part of that function is:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#75715e>// ...</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// `text` is a selected number of characters from App.Password, App.Note, App.Step and App.Desc</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(text));
+</span></span><span style=display:flex><span><span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// `Runtime.Runtime_dll` is the content of a resource named `Runtime.dll`</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// its 83392 bytes</span>
+</span></span><span style=display:flex><span>    App.ImgData = Convert.FromBase64String(Util.GetString(Runtime.Runtime_dll, key, bytes));
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...</span>
+</span></span></code></pre></div><p>And <code>Util.GetString</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetString(<span style=color:#66d9ef>byte</span>[] cipherText, <span style=color:#66d9ef>byte</span>[] Key, <span style=color:#66d9ef>byte</span>[] IV)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>string</span> result = <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>using</span> (RijndaelManaged rijndaelManaged = <span style=color:#66d9ef>new</span> RijndaelManaged())
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		rijndaelManaged.Key = Key;
+</span></span><span style=display:flex><span>		rijndaelManaged.IV = IV;
+</span></span><span style=display:flex><span>		ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV);
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>using</span> (MemoryStream memoryStream = <span style=color:#66d9ef>new</span> MemoryStream(cipherText))
+</span></span><span style=display:flex><span>		{
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>using</span> (CryptoStream cryptoStream = <span style=color:#66d9ef>new</span> CryptoStream(memoryStream, cryptoTransform, <span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>			{
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>using</span> (StreamReader streamReader = <span style=color:#66d9ef>new</span> StreamReader(cryptoStream))
+</span></span><span style=display:flex><span>				{
+</span></span><span style=display:flex><span>					result = streamReader.ReadToEnd();
+</span></span><span style=display:flex><span>				}
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> result;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This looks like <a href=https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>AES</a> decryption. Now we have all the pieces, lets solve it.</p><h2 id=solution>Solution</h2><p>First, we can export the resource <code>Runtime.dll</code> into a file.</p><p>Then we run this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.IO;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Text;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Security.Cryptography;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainClass</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetString(<span style=color:#66d9ef>byte</span>[] cipherText, <span style=color:#66d9ef>byte</span>[] Key, <span style=color:#66d9ef>byte</span>[] IV)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> result = <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>using</span> (RijndaelManaged rijndaelManaged = <span style=color:#66d9ef>new</span> RijndaelManaged())
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            rijndaelManaged.Key = Key;
+</span></span><span style=display:flex><span>            rijndaelManaged.IV = IV;
+</span></span><span style=display:flex><span>            ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>using</span> (MemoryStream memoryStream = <span style=color:#66d9ef>new</span> MemoryStream(cipherText))
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>using</span> (CryptoStream cryptoStream = <span style=color:#66d9ef>new</span> CryptoStream(memoryStream, cryptoTransform, <span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>using</span> (StreamReader streamReader = <span style=color:#66d9ef>new</span> StreamReader(cryptoStream))
+</span></span><span style=display:flex><span>                    {
+</span></span><span style=display:flex><span>                        result = streamReader.ReadToEnd();
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> result;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main (<span style=color:#66d9ef>string</span>[] args) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] key = SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;the kind of challenges we are gonna make here&#34;</span>));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style=color:#e6db74>&#34;NoSaltOfTheEarth&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    	<span style=color:#66d9ef>byte</span>[] cihperText = File.ReadAllBytes(<span style=color:#e6db74>&#34;Runtime.dll&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span>[] result = Convert.FromBase64String(GetString(cihperText, key, bytes));
+</span></span><span style=display:flex><span>        File.WriteAllBytes(<span style=color:#e6db74>&#34;out.jpg&#34;</span>, result);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Running this, we get an image:
+<img src=flag.jpg alt=flag></p><p>Flag:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>n3ver_go1ng_to_recov3r@flare-on.com
+</span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://amjad.alsharafi.dev/en/tags/writeup>writeup</a></li><li><a href=https://amjad.alsharafi.dev/en/tags/flareon7>flareon7</a></li><li><a href=https://amjad.alsharafi.dev/en/tags/c>C#</a></li></ul><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on twitter" href="https://twitter.com/intent/tweet/?text=TKApp&amp;url=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&amp;hashtags=writeup%2cflareon7%2cC%23"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&amp;title=TKApp&amp;summary=TKApp&amp;source=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on reddit" href="https://reddit.com/submit?url=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f&title=TKApp"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on whatsapp" href="https://api.whatsapp.com/send?text=TKApp%20-%20https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share TKApp on telegram" href="https://telegram.me/share/url?text=TKApp&amp;url=https%3a%2f%2famjad.alsharafi.dev%2fen%2fposts%2fflareon7%2f5_-_tkapp%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://amjad.alsharafi.dev/en/>Amjad Alsharafi</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo️️</a>️</span>
 <span>&#183;</span>
-<span>Theme️ <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top"><button class=top-link id=top-link type=button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script src=https://amjad50.github.io/assets/js/highlight.min.e7afc2928c0925d65c4732dfebe147014d91299a98e819e4b42f25c4fa68e91c.js integrity="sha256-56/CkowJJdZcRzLf6+FHAU2RKZqY6BnktC8lxPpo6Rw="></script><script>hljs.initHighlightingOnLoad();</script><script>window.onload=function(){if(localStorage.getItem("menu-scroll-position")){document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position");}}
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener("click",function(e){e.preventDefault();document.querySelector(this.getAttribute("href")).scrollIntoView({behavior:"smooth"});});});var mybutton=document.getElementById("top-link");window.onscroll=function(){if(document.body.scrollTop>800||document.documentElement.scrollTop>800){mybutton.style.visibility="visible";mybutton.style.opacity="1";}else{mybutton.style.visibility="hidden";mybutton.style.opacity="0";}};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft);}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{if(document.body.className.includes("dark")){document.body.classList.remove('dark');localStorage.setItem("pref-theme",'light');}else{document.body.classList.add('dark');localStorage.setItem("pref-theme",'dark');}})</script></body></html>
+<span>Theme️ <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top"><button class=top-link id=top-link type=button>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg></button>
+</a><script src=https://amjad.alsharafi.dev/assets/js/highlight.min.c3ba6b72cb9e7e277941c68cf93ddb7934b56c911c142c959587a4135585740f.js integrity="sha256-w7prcsuefid5QcaM+T3beTS1bJEcFCyVlYekE1WFdA8="></script><script>hljs.initHighlightingOnLoad()</script><script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById("menu").scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault(),document.querySelector(this.getAttribute("href")).scrollIntoView({behavior:"smooth"})})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById("menu").scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>
