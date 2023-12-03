@@ -14,8 +14,8 @@ tags:
 - rust
 category:
 - نظام تشغيل
-series:    image: "cover.jpg"
-
+series:
+- تطوير نظم التشغيل
 series_weight: 0
 ---
 
