@@ -19,7 +19,6 @@ markup:
     codeFences: true
     guessSyntax: true
     lineNos: true
-    style: monokai
 
 
 minify:
@@ -29,9 +28,7 @@ minify:
 params:
   env: production
   description: "Personal site of Amjad Alsharafi"
-  author: Amjad
   keywords: [Blog, Portfolio, Amjad, Computer science]
-  author: Me
   DateFormat: "January 2, 2006"
 
   # ShowReadingTime: true
@@ -113,6 +110,7 @@ languages:
           weight: 2
 
     params:
+      author: Amjad
       homeInfoParams:
         Title: "Hi \U0001F44B"
         Description: "Personal website of Amjad Alsharafi"
@@ -126,7 +124,6 @@ languages:
     languageName: "العربية"
     weight: 2
     title: "أمجد الشرفي"
-    author: أمجد
 
     menu:
       main:
@@ -138,6 +135,7 @@ languages:
           weight: 2
     
     params:
+      author: أمجد
       homeInfoParams:
         Title: "\U0001F44B أهلاً"
         Description: "موقع شخصي لأمجد الشرفي"
