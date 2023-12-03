@@ -32,7 +32,7 @@ params:
   author: Amjad
   keywords: [Blog, Portfolio, Amjad, Computer science]
   author: Me
-  DateFormat: "January 1, 2023"
+  DateFormat: "January 2, 2006"
 
   # ShowReadingTime: true
   defaultTheme: auto
