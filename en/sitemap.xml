@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://amjad.alsharafi.dev/en/</loc>
-    <lastmod>2020-12-07T09:10:50+03:00</lastmod>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -15,8 +15,27 @@
                 href="https://amjad.alsharafi.dev/en/"
                 />
   </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/operating-system/</loc>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/</loc>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/"
+                />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/operating-system-development/</loc>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://amjad.alsharafi.dev/en/posts/</loc>
-    <lastmod>2020-12-07T09:10:50+03:00</lastmod>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -28,8 +47,21 @@
                 href="https://amjad.alsharafi.dev/en/posts/"
                 />
   </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/rust/</loc>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/tags/rust/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/tags/rust/"
+                />
+  </url><url>
     <loc>https://amjad.alsharafi.dev/en/series/</loc>
-    <lastmod>2020-12-07T09:10:50+03:00</lastmod>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -42,7 +74,7 @@
                 />
   </url><url>
     <loc>https://amjad.alsharafi.dev/en/tags/</loc>
-    <lastmod>2020-12-07T09:10:50+03:00</lastmod>
+    <lastmod>2023-12-03T05:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
