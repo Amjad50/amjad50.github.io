@@ -1,54 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>flareon7 on Amjad Alsharafi</title>
     <link>https://amjad.alsharafi.dev/en/tags/flareon7/</link>
     <description>Recent content in flareon7 on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Oct 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://amjad.alsharafi.dev/en/tags/flareon7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/tags/flareon7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>codeit</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</guid>
-      <description>Sixth challenge of FlareOn7</description>
+      <description>Writeup of 6_-_codeit, the sixth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>TKApp</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</guid>
-      <description>Fifth challenge of FlareOn7</description>
+      <description>Writeup of 5_-_TKApp, the fifth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>report</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</link>
       <pubDate>Wed, 14 Oct 2020 03:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</guid>
-      <description>Fourth challenge of FlareOn7</description>
+      <description>Writeup of 4_-_report, the fourth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>wednesday</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</link>
       <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</guid>
-      <description>Third challenge of FlareOn7</description>
+      <description>Writeup of 3_-_wednesday, the third challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>garbage</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</link>
       <pubDate>Wed, 14 Oct 2020 01:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</guid>
-      <description>Second challenge of FlareOn7</description>
+      <description>Writeup of 2_-_garbage, the second challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>fidler</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</link>
       <pubDate>Wed, 14 Oct 2020 00:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</guid>
-      <description>First challenge of FlareOn7</description>
+      <description>Writeup of 1_-_fidler, the first challenge in FlareOn7</description>
     </item>
+    
   </channel>
 </rss>

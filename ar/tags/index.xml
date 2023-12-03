@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>الفئات on أمجد الشرفي</title>
     <link>https://amjad.alsharafi.dev/ar/tags/</link>
     <description>Recent content in الفئات on أمجد الشرفي</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ar</language>
-    <atom:link href="https://amjad.alsharafi.dev/ar/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>ar</language><atom:link href="https://amjad.alsharafi.dev/ar/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

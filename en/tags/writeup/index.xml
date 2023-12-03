@@ -1,103 +1,128 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>writeup on Amjad Alsharafi</title>
     <link>https://amjad.alsharafi.dev/en/tags/writeup/</link>
     <description>Recent content in writeup on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate>
-    <atom:link href="https://amjad.alsharafi.dev/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WGMY2020 - Forensic - Lord Kiske&#39;s Server</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</link>
       <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</guid>
-      <description>Many forensic related challenges grouped into one writeup</description>
+      <description>Writeup of the forensics challenges in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - misc - Defuse The Bomb!</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</link>
       <pubDate>Sun, 06 Dec 2020 20:40:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</guid>
-      <description>Zip chain hell challenge</description>
+      <description>Writeup of the misc challenge Defuse The Bomb! in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - Crypto - babyrsa</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</link>
       <pubDate>Sun, 06 Dec 2020 20:30:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</guid>
-      <description>Simple RSA encryption challenge</description>
+      <description>Writeup of the crypto challenge babyrsa in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - Mobile - SpeedyQuizy</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</link>
       <pubDate>Sun, 06 Dec 2020 11:30:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</guid>
-      <description>Android mobile app reverse engineering challenge</description>
+      <description>Writeup of the mobile challenge SpeedyQuizy in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - RE - kmum</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</link>
       <pubDate>Sun, 06 Dec 2020 09:15:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</guid>
-      <description>Third reverse engineering challenge in WGMY2020</description>
+      <description>Writeup of the reversing challenge kmum in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - RE - Senang</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</link>
       <pubDate>Sun, 06 Dec 2020 07:31:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</guid>
-      <description>Second reverse engineering challenge in WGMY2020</description>
+      <description>Writeup of the reversing challenge Senang in WGMY2020</description>
     </item>
+    
     <item>
       <title>WGMY2020 - RE - babyrev</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</link>
       <pubDate>Sun, 06 Dec 2020 07:00:50 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</guid>
-      <description>Simple reversing challenge</description>
+      <description>Writeup of the reversing challenge bebyrev in WGMY2020</description>
     </item>
+    
     <item>
       <title>codeit</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</guid>
-      <description>Sixth challenge of FlareOn7</description>
+      <description>Writeup of 6_-_codeit, the sixth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>TKApp</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</guid>
-      <description>Fifth challenge of FlareOn7</description>
+      <description>Writeup of 5_-_TKApp, the fifth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>report</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</link>
       <pubDate>Wed, 14 Oct 2020 03:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</guid>
-      <description>Fourth challenge of FlareOn7</description>
+      <description>Writeup of 4_-_report, the fourth challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>wednesday</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</link>
       <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</guid>
-      <description>Third challenge of FlareOn7</description>
+      <description>Writeup of 3_-_wednesday, the third challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>garbage</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</link>
       <pubDate>Wed, 14 Oct 2020 01:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</guid>
-      <description>Second challenge of FlareOn7</description>
+      <description>Writeup of 2_-_garbage, the second challenge in FlareOn7</description>
     </item>
+    
     <item>
       <title>fidler</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</link>
       <pubDate>Wed, 14 Oct 2020 00:00:00 +0300</pubDate>
+      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</guid>
-      <description>First challenge of FlareOn7</description>
+      <description>Writeup of 1_-_fidler, the first challenge in FlareOn7</description>
     </item>
+    
   </channel>
 </rss>
