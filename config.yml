@@ -5,7 +5,22 @@ theme: hugo-PaperMod
 defaultContentLanguageInSubdir: true
 defaultContentLanguge: en
 
-googleAnalytics: G-N62ZER16LZ
+enableRobotsTXT: true
+
+# assets:
+#     disableHLJS: true
+markup:
+  tableOfContents:
+    ordered: false
+    startLevel: 1
+  highlight:
+    anchorLineNos: true
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    style: monokai
+
 
 minify:
   disableXML: true
@@ -15,11 +30,29 @@ params:
   env: production
   description: "Personal site of Amjad Alsharafi"
   author: Amjad
+  keywords: [Blog, Portfolio, Amjad, Computer science]
+  author: Me
+  DateFormat: "January 1, 2023"
 
   # ShowReadingTime: true
   defaultTheme: auto
   ShowShareButtons: true
   displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  
 
   socialIcons:
     - name: twitter
@@ -28,6 +61,8 @@ params:
       url: "https://www.linkedin.com/in/amjad-alshrarafi-346956b2/"
     - name: github
       url: "https://github.com/Amjad50"
+    - name: rss
+      url: "index.xml"
 
 taxonomies:
   category: categories
@@ -57,6 +92,12 @@ services:
     disableInlineCSS: true
   twitter:
     disableInlineCSS: true
+  googleAnalytics:
+    ID:  G-N62ZER16LZ
+  services:
+    rss:
+      limit: 42
+
 
 languages:
   en:
@@ -71,24 +112,21 @@ languages:
           url: series
           weight: 2
 
-    homeInfoParams:
-      Title: "Hi \U0001F44B"
-      Content: >
-        I'm Amjad Alsharafi. This is my personal website.
-        I write articles about computers, `CTF` writeups, and maybe other stuff.
+    params:
+      homeInfoParams:
+        Title: "Hi \U0001F44B"
+        Description: "Personal website of Amjad Alsharafi"
+        Content: >
+          I'm Amjad Alsharafi. This is my personal website.
+          I write articles about computers, `CTF` writeups, and maybe other stuff.
+
+       
   ar:
     languagedirection: rtl
     languageName: "العربية"
     weight: 2
     title: "أمجد الشرفي"
-    description: "الموقع الشخصي لأمجد الشرفي"
     author: أمجد
-
-    homeInfoParams:
-      Title: "\U0001F44B أهلاً"
-      Content: >
-        أنا أمجد الشرفي. هذا موقعي الشخصي.
-        أكتب مقالات عن الحاسبات، بعض الحلول لمسابقات CTF ، وممكن أشياء أخرى.
 
     menu:
       main:
@@ -98,3 +136,11 @@ languages:
         - name: سلاسل
           url: series
           weight: 2
+    
+    params:
+      homeInfoParams:
+        Title: "\U0001F44B أهلاً"
+        Description: "موقع شخصي لأمجد الشرفي"
+        Content: >
+          أنا أمجد الشرفي. هذا موقعي الشخصي.
+          أكتب مقالات عن الحاسبات، بعض الحلول لمسابقات CTF ، وممكن أشياء أخرى.
