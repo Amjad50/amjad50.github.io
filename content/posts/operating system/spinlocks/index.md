@@ -19,13 +19,20 @@ series:
 series_weight: 0
 ---
 
-Recently, I've been working on a small operating system in Rust ([OS]), one my goals in this project is building 
+Recently, I've been working on a small operating system in [`Rust`] ([OS]), one my goals in this project is building 
 as much as I can from scratch (at the time of writing, 0 dependencies), of course you don't have to do that, but
 I think this is a good learning opportunity.
 
 Anyway, one of the important things in an operating system is synchronization, since most resources in the kernel
 is shared between multiple cores, we need to make sure that only one core can access a resource at a time, and
 that's where locks come in.
+
+> Even though I'm saying "operating systems" here, this kind of locking is used in any bare-metal application, like
+> embedded systems, or even in user-space applications.
+
+> I'm using [`Rust`] here for implementation, but this is not a Rust specific post, and you can implement it in any
+> language you want, the idea is the same.
+
 
 ## What is a lock?
 
@@ -496,6 +503,7 @@ This implementation was greatly inspired by the lock implementation in [`xv6`], 
 
 Happy hacking :D
 
+[`Rust`]: https://www.rust-lang.org/
 [OS]: https://github.com/Amjad50/OS
 [`pthread_mutex_lock/unlock`]: https://linux.die.net/man/3/pthread_mutex_lock
 [`AcquireSRWLockExclusive`]: https://docs.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockexclusive
