@@ -1,6 +1,7 @@
 ---
 title: نظام التشغيل - القفل الدوراني
 date: 2023-12-03T5:00:00+08:00
+lastmod: 2023-12-05T9:00:00+08:00
 ShowToc: true
 TocOpen: true
 summary: الحديث عن تنفيذ القفل الدوراني بشكل آمن باستخدام لغة Rust في نظام تشغيل
@@ -424,8 +425,9 @@ fn kernel_main() {
 
 `SpinMutexGuard` ينفذ [`Deref`] و [`DerefMut`] لتسهيل الوصول إلى البيانات الداخلية. كما ينفذ أيضًا [`Drop`] بحيث يتم فتح القفل عندما لا يكون هناك حاجة إليه بعد (مثل عندما يخرج من نطاق الرؤية). يوفر ذلك لنا من الحاجة إلى استدعاء `unlock` يدويًا (RAII).
 
+وهذا في الأساس كل شيء، لدينا قفل دوران جيد الآن، ويمكننا استخدامه بسهولة.
 
-#### تحسين صغير إضافي
+## تحسينات صغيرة إضافية
 
 شيء آخر تركته للنهاية، حيث لا يؤثر على الوظائف، ولكنه تحسين جميل.
 
@@ -439,7 +441,9 @@ fn lock(&self) {
 }
 ```
 
-وهذا هو، لدينا الآن `Spinlock` رائع، ويمكننا استخدامه بسهولة.
+شيء آخر (شكرًا لـ `zypeh`) هو استخدام `core::sync::atomic::AtomicUsize` بدلاً من `core::sync::atomic::AtomicBool`،
+أو باستخدام [`crossbeam_utils::CachePadded`] للتأكد من أن القفل ليس في نفس خط التخزين المؤقت للذاكرة الذي يحتوي على متغيرات أخرى.
+وبذلك، يمكننا تجنب مشكلة التشارك الكاذبة (false sharing)، وتحسين الأداء.
 
 ## المشاكل
 
@@ -486,6 +490,7 @@ fn lock(&self) {
 [`DerefMut`]: https://doc.rust-lang.org/std/ops/trait.DerefMut.html
 [`Drop`]: https://doc.rust-lang.org/std/ops/trait.Drop.html
 [`core::hint::spin_loop`]: https://doc.rust-lang.org/core/hint/fn.spin_loop.html
+[`crossbeam_utils::CachePadded`]: https://docs.rs/crossbeam-utils/latest/crossbeam_utils/struct.CachePadded.html
 [`ReentrantMutex`]: https://doc.rust-lang.org/stable/src/std/sync/remutex.rs.html
 [`ReentrantMutex<RefCell<LineWriter<StdoutRaw>>>`]: https://doc.rust-lang.org/stable/src/std/io/stdio.rs.html#539
 [`xv6`]: https://github.com/mit-pdos/xv6-public/blob/master/spinlock.c

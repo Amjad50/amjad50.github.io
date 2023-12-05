@@ -1,6 +1,7 @@
 ---
 title: Operating System - Spinlocks
 date: 2023-12-03T5:00:00+08:00
+lastmod: 2023-12-05T9:00:00+08:00
 ShowToc: true
 TocOpen: true
 summary: Blabbing about implementing spinlocks safely with Rust in an operating system
@@ -447,7 +448,9 @@ When we lock the `Mutex`, we get a `SpinMutexGuard` back that has a reference to
 
 `SpinMutexGuard` implements [`Deref`] and [`DerefMut`] to make it easy to get to the data inside. It also implements [`Drop`] so that the lock gets unlocked when it's not needed anymore (like when it goes out of scope). This saves us from having to manually call `unlock` (RAII).
 
-#### Extra small improvement
+And that's mainly it, we have a nice spinlock now, and we can use it easily.
+
+## Extra small improvements
 
 Another thing I left for last, since it doesn't affect functionality, but it is a nice improvement.
 
@@ -462,7 +465,9 @@ fn lock(&self) {
 }
 ```
 
-And that's it, we have a nice spinlock now, and we can use it easily.
+Another thing (Thanks to `zypeh`) is using `core::sync::atomic::AtomicUsize` instead of `core::sync::atomic::AtomicBool`,
+or by using [`crossbeam_utils::CachePadded`] to make sure that the lock is not in the same cache line as other variables,
+and thus, we can avoid false sharing, and improve performance.
 
 ## Issues
 
@@ -519,6 +524,7 @@ Happy hacking :D
 [`DerefMut`]: https://doc.rust-lang.org/std/ops/trait.DerefMut.html
 [`Drop`]: https://doc.rust-lang.org/std/ops/trait.Drop.html
 [`core::hint::spin_loop`]: https://doc.rust-lang.org/core/hint/fn.spin_loop.html
+[`crossbeam_utils::CachePadded`]: https://docs.rs/crossbeam-utils/latest/crossbeam_utils/struct.CachePadded.html
 [`ReentrantMutex`]: https://doc.rust-lang.org/stable/src/std/sync/remutex.rs.html
 [`ReentrantMutex<RefCell<LineWriter<StdoutRaw>>>`]: https://doc.rust-lang.org/stable/src/std/io/stdio.rs.html#539
 [`xv6`]: https://github.com/mit-pdos/xv6-public/blob/master/spinlock.c
