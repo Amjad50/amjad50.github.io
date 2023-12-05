@@ -6,6 +6,7 @@ defaultContentLanguageInSubdir: true
 defaultContentLanguge: en
 
 enableRobotsTXT: true
+enableEmoji: true
 
 # assets:
 #     disableHLJS: true
@@ -37,8 +38,9 @@ params:
   displayFullLangName: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
+  ShowReadingTime: true
   ShowCodeCopyButtons: true
-  ShowWordCount: true
+  ShowWordCount: false
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
   disableSpecial1stPost: false
@@ -60,6 +62,9 @@ params:
       url: "https://github.com/Amjad50"
     - name: rss
       url: "index.xml"
+  editPost:
+    URL: "https://github.com/Amjad50/amjad50.github.io/tree/master/content"
+    appendFilePath: true
 
 taxonomies:
   category: categories
@@ -117,7 +122,8 @@ languages:
         Content: >
           I'm Amjad Alsharafi. This is my personal website.
           I write articles about computers, `CTF` writeups, and maybe other stuff.
-
+      editPost:
+        Text: "Suggest changes"
        
   ar:
     languagedirection: rtl
@@ -142,3 +148,5 @@ languages:
         Content: >
           أنا أمجد الشرفي. هذا موقعي الشخصي.
           أكتب مقالات عن الحاسبات، بعض الحلول لمسابقات CTF ، وممكن أشياء أخرى.
+      editPost:
+        Text: "اقترح تعديلات"
