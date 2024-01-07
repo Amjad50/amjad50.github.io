@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>wgmy2023 on Amjad Alsharafi</title>
+    <link>https://amjad.alsharafi.dev/en/tags/wgmy2023/</link>
+    <description>Recent content in wgmy2023 on Amjad Alsharafi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 07 Jan 2024 07:00:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/tags/wgmy2023/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2023 - Forensics - can&#39;t snoop</title>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</link>
+      <pubDate>Sun, 07 Jan 2024 07:00:50 +0300</pubDate>
+      
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</guid>
+      <description>Writeup of the forensics challenge &amp;#34;can&amp;#39;t snoop&amp;#34; in WGMY2023</description>
+    </item>
+    
+  </channel>
+</rss>

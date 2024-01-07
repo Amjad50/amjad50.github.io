@@ -6,7 +6,16 @@
     <description>Recent content in writeup on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Dec 2020 09:10:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jan 2024 07:00:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2023 - Forensics - can&#39;t snoop</title>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</link>
+      <pubDate>Sun, 07 Jan 2024 07:00:50 +0300</pubDate>
+      
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</guid>
+      <description>Writeup of the forensics challenge &amp;#34;can&amp;#39;t snoop&amp;#34; in WGMY2023</description>
+    </item>
+    
     <item>
       <title>WGMY2020 - Forensic - Lord Kiske&#39;s Server</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</link>

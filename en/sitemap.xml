@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://amjad.alsharafi.dev/en/</loc>
-    <lastmod>2023-12-05T09:00:00+08:00</lastmod>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -14,6 +14,57 @@
                 hreflang="en"
                 href="https://amjad.alsharafi.dev/en/"
                 />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/posts/"
+                />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/series/"
+                />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/tags/"
+                />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2023-writeups/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/wgmy2023/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/tags/writeup/</loc>
+    <lastmod>2024-01-07T07:00:50+03:00</lastmod>
   </url><url>
     <loc>https://amjad.alsharafi.dev/en/tags/operating-system/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
@@ -34,19 +85,6 @@
     <loc>https://amjad.alsharafi.dev/en/series/operating-system-development/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/</loc>
-    <lastmod>2023-12-05T09:00:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://amjad.alsharafi.dev/en/posts/"
-                />
-  </url><url>
     <loc>https://amjad.alsharafi.dev/en/tags/rust/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
@@ -60,32 +98,6 @@
                 href="https://amjad.alsharafi.dev/en/tags/rust/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/</loc>
-    <lastmod>2023-12-05T09:00:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://amjad.alsharafi.dev/en/series/"
-                />
-  </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/</loc>
-    <lastmod>2023-12-05T09:00:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://amjad.alsharafi.dev/en/tags/"
-                />
-  </url><url>
     <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2020-writeups/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
@@ -93,9 +105,6 @@
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
     <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</loc>
-    <lastmod>2020-12-07T09:10:50+03:00</lastmod>
-  </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/writeup/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
     <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</loc>

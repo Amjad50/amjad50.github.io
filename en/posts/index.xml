@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Amjad Alsharafi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Dec 2023 05:00:00 +0800</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jan 2024 07:00:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2023 - Forensics - can&#39;t snoop</title>
+      <link>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</link>
+      <pubDate>Sun, 07 Jan 2024 07:00:50 +0300</pubDate>
+      
+      <guid>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</guid>
+      <description>Writeup of the forensics challenge &amp;#34;can&amp;#39;t snoop&amp;#34; in WGMY2023</description>
+    </item>
+    
     <item>
       <title>Operating System - Spinlocks</title>
       <link>https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/</link>
