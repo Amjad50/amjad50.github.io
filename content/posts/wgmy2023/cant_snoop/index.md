@@ -24,7 +24,9 @@ series_weight: 0
 
 If you want to attempt the challenge, here are two files you can use:
 - [notclean.pcapng]: This is the original file used in the CTF and contain a lot of noise
-- [clean.pcapng]: This is just the interesting parts of the original file, so you can focus on the interesting parts
+- [clean.pcapng]: This is just the interesting parts of the original file, so you can focus on the interesting parts, But the key and random values are different than this writeup.
+
+This writeup is based on the [notclean.pcapng] file.
 
 
 ### Communication
