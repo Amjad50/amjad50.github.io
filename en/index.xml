@@ -148,7 +148,11 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://amjad.alsharafi.dev/en/about/</guid>
-      <description>Nothing here for now</description>
+      <description>Hello, I&amp;rsquo;m Amjad Alsharafi.
+I&amp;rsquo;m a reverse engineer and malware researcher at work.
+I also enjoy:
+programming especially low-level/performance stuff like emulators and OSes. CTFs, I mostly do reverse :D Chess. Some projects I have worked on (open source):
+Name Description plastic NES emulator, it was the first real emulator I built, still works well. Got it to work on android through ffi which was interesting journey. mizu GB emulator focusing on accuracy, performed better than some popular emulators on tests, This has less UI support than plastic done by me, but the API is very easy to use and can be embedded anywhere since it just uses arrays to store images and so on.</description>
     </item>
     
   </channel>
