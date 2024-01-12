@@ -450,12 +450,52 @@ When we lock the `Mutex`, we get a `SpinMutexGuard` back that has a reference to
 
 And that's mainly it, we have a nice spinlock now, and we can use it easily.
 
-## Extra small improvements
+## Performance improvements
 
-Another thing I left for last, since it doesn't affect functionality, but it is a nice improvement.
+Some things I left for last, since these don't affect functionality but affects performance greatly.
+
+### Cache lines and false sharing
+
+> Thanks to zypeh for pointing this out.
+
+Another thing is using `core::sync::atomic::AtomicUsize` instead of `core::sync::atomic::AtomicBool`,
+or by using [`crossbeam_utils::CachePadded`] to make sure that the lock is not in the same cache line as other variables,
+and thus, we can avoid false sharing, and improve performance.
+
+### Cache exclusion
+
+> Thanks to matthieum for pointing this out.
+
+Because we are using the loop below to spin, we are going to request exclusive access to the cache line for the current CPU, and if there are more than 1 CPU waiting, the other CPU will also request exclusive access on every loop.
+```rust
+fn lock(&self) {
+    while self.locked.compare_exchange(false, true, Ordering::Acquire, Ordering::Relaxed).is_err() {
+        // spin
+    }
+}
+```
+This results in something called **cache ping-pong**, where the cache line is passed between the CPUs, and thus, we have a lot of cache misses, and thus, we have a lot of performance issues.
+
+A better solution is to only perform `compare_exchange` once, and then spin without requesting exclusive access to the cache line, and then perform `compare_exchange` again when we know that we might get access, and so on.
+
+```rust {hl_lines=[4]}
+fn lock(&self) {
+    // try to lock once if failed go in the loop
+    while self.locked.compare_exchange(false, true, Ordering::Acquire, Ordering::Relaxed).is_err() {
+        while self.locked.load(Ordering::Relaxed) {
+            // spin
+        }
+    }
+}
+```
+
+### `spin_loop`
 
 And that's using [`core::hint::spin_loop`] instead of an empty loop, this will hint the compile/cpu that we are spinning,
 and thus, it can optimize it better.
+
+> Here I'm calling on every loop for simplicity, but I got some comments that its better to not call it on every
+ loop, for best performance its better to iterate a fixed number of times (determined with testing) and then call `spin_loop`.
 
 ```rust {hl_lines=[3]}
 fn lock(&self) {
@@ -465,9 +505,6 @@ fn lock(&self) {
 }
 ```
 
-Another thing (Thanks to `zypeh`) is using `core::sync::atomic::AtomicUsize` instead of `core::sync::atomic::AtomicBool`,
-or by using [`crossbeam_utils::CachePadded`] to make sure that the lock is not in the same cache line as other variables,
-and thus, we can avoid false sharing, and improve performance.
 
 ## Issues
 
