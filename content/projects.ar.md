@@ -2,7 +2,7 @@
 title: مشاريع
 layout: single
 TocOpen: true
-description: جميع المشاريع التي عملت عليها أو شاركت فيها في جميع تجاربي.
+description: أهم المشاريع التي عملت عليها أو شاركت فيها في جميع تجاربي.
 showReadingTime: false
 editPost:
     disabled: true

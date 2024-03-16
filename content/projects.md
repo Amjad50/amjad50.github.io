@@ -2,7 +2,7 @@
 title: Projects
 layout: single
 TocOpen: true
-description: All projects I worked on or been part of in all my experiences.
+description: Most important projects I worked on or been part of in all my experiences.
 showReadingTime: false
 editPost:
     disabled: true
