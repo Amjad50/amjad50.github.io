@@ -99,9 +99,6 @@
                 href="https://amjad.alsharafi.dev/ar/categories/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/posts/test/</loc>
-    <lastmod>2020-10-29T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://amjad.alsharafi.dev/ar/about/</loc>
     <xhtml:link
                 rel="alternate"
@@ -112,6 +109,18 @@
                 rel="alternate"
                 hreflang="ar"
                 href="https://amjad.alsharafi.dev/ar/about/"
+                />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/ar/projects/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/projects/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/projects/"
                 />
   </url>
 </urlset>

@@ -16,14 +16,5 @@
       <description>الحديث عن تنفيذ القفل الدوراني بشكل آمن باستخدام لغة Rust في نظام تشغيل</description>
     </item>
     
-    <item>
-      <title>تجربه</title>
-      <link>https://amjad.alsharafi.dev/ar/posts/test/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://amjad.alsharafi.dev/ar/posts/test/</guid>
-      <description>فارغ </description>
-    </item>
-    
   </channel>
 </rss>

@@ -184,5 +184,17 @@
                 hreflang="en"
                 href="https://amjad.alsharafi.dev/en/categories/"
                 />
+  </url><url>
+    <loc>https://amjad.alsharafi.dev/en/projects/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://amjad.alsharafi.dev/ar/projects/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://amjad.alsharafi.dev/en/projects/"
+                />
   </url>
 </urlset>
