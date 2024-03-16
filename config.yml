@@ -114,6 +114,9 @@ languages:
         - name: Series
           url: series
           weight: 2
+        - name: Projects
+          url: projects
+          weight: 3
 
     params:
       author: Amjad
@@ -140,6 +143,9 @@ languages:
         - name: سلاسل
           url: series
           weight: 2
+        - name: مشاريع
+          url: projects
+          weight: 3
     
     params:
       author: أمجد
