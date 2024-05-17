@@ -61,6 +61,8 @@ params:
       url: "https://www.linkedin.com/in/amjad-alshrarafi-346956b2/"
     - name: github
       url: "https://github.com/Amjad50"
+    - name: cv
+      url: /cv.pdf
     - name: rss
       url: "index.xml"
   editPost:
@@ -111,11 +113,11 @@ languages:
         - name: About
           url: about
           weight: 1
+        - name: Projects/Porfolio
+          url: projects
+          weight: 2
         - name: Series
           url: series
-          weight: 2
-        - name: Projects
-          url: projects
           weight: 3
 
     params:
@@ -125,7 +127,7 @@ languages:
         Description: "Personal website of Amjad Alsharafi"
         Content: >
           I'm Amjad Alsharafi. This is my personal website.
-          I write articles about computers, `CTF` writeups, and maybe other stuff.
+          I write articles about computers, software, kernels, `CTF` writeups, and maybe other stuff.
       editPost:
         Text: "Suggest changes"
        
@@ -140,13 +142,13 @@ languages:
         - name: عن
           url: about
           weight: 1
-        - name: سلاسل
-          url: series
-          weight: 2
         - name: مشاريع
           url: projects
+          weight: 2
+        - name: سلاسل
+          url: series
           weight: 3
-    
+
     params:
       author: أمجد
       homeInfoParams:

@@ -6,7 +6,9 @@ showReadingTime: false
 
 Hello, I'm Amjad Alsharafi.
 
-I'm a reverse engineer and malware researcher at work.
+I'm a software engineer, and malware researcher.
+
+Please checkout my [cv](/cv.pdf).
 
 I also enjoy:
 - programming especially low-level/performance stuff like emulators and OSes.
