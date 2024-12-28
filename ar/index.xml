@@ -4,41 +4,46 @@
     <title>أمجد الشرفي</title>
     <link>https://amjad.alsharafi.dev/ar/</link>
     <description>Recent content on أمجد الشرفي</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.4</generator>
     <language>ar</language>
-    <lastBuildDate>Sun, 03 Dec 2023 05:00:00 +0800</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/ar/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Dec 2023 09:00:00 +0800</lastBuildDate>
+    <atom:link href="https://amjad.alsharafi.dev/ar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>نظام التشغيل - القفل الدوراني</title>
       <link>https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/</link>
       <pubDate>Sun, 03 Dec 2023 05:00:00 +0800</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/</guid>
       <description>الحديث عن تنفيذ القفل الدوراني بشكل آمن باستخدام لغة Rust في نظام تشغيل</description>
     </item>
-    
     <item>
       <title>عن</title>
       <link>https://amjad.alsharafi.dev/ar/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/ar/about/</guid>
-      <description>مرحبًا، أنا أمجد الشرافي.
-أنا مهندس برمجيات وباحث في البرمجيات الخبيثة.
-يرجى الاطلاع على سيرتي الذاتية.
-كما أستمتع بـ:
-البرمجة، خاصة الأشياء ذات المستوى المنخفض/الأداء العالي مثل محاكيات الأنظمة ونظم التشغيل. مسابقات التحديات السيبرانية، أقوم بالهندسة العكسية في الغالب. الشطرنج. شاهد مشاريعي على مشاريعي.
-جهات الاتصال يمكنك الاتصال بي عبر:
-تويتر/X لينكدإن البريد الإلكتروني </description>
+      <description>&lt;p&gt;مرحبًا، أنا أمجد الشرافي.&lt;/p&gt;
+&lt;p&gt;أنا مهندس برمجيات وباحث في البرمجيات الخبيثة.&lt;/p&gt;
+&lt;p&gt;يرجى الاطلاع على &lt;a href=&#34;https://amjad.alsharafi.dev/cv.pdf&#34;&gt;سيرتي الذاتية&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;كما أستمتع بـ:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;البرمجة، خاصة الأشياء ذات المستوى المنخفض/الأداء العالي مثل محاكيات الأنظمة ونظم التشغيل.&lt;/li&gt;
+&lt;li&gt;مسابقات التحديات السيبرانية، أقوم بالهندسة العكسية في الغالب.&lt;/li&gt;
+&lt;li&gt;الشطرنج.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;شاهد مشاريعي على &lt;a href=&#34;https://amjad.alsharafi.dev/ar/projects/&#34;&gt;مشاريعي&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;جهات-الاتصال&#34;&gt;جهات الاتصال&lt;/h2&gt;
+&lt;p&gt;يمكنك الاتصال بي عبر:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://x.com/AmjadAlsharafi5&#34;&gt;تويتر/X&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/amjad-alshrarafi-346956b2&#34;&gt;لينكدإن&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;mailto:me@amjad.alsharafi.dev&#34;&gt;البريد الإلكتروني&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>مشاريع</title>
       <link>https://amjad.alsharafi.dev/ar/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/ar/projects/</guid>
       <description>أهم المشاريع التي عملت عليها أو شاركت فيها في جميع تجاربي.</description>
     </item>
-    
   </channel>
 </rss>

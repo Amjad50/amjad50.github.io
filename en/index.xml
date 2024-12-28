@@ -4,167 +4,144 @@
     <title>Amjad Alsharafi</title>
     <link>https://amjad.alsharafi.dev/en/</link>
     <description>Recent content on Amjad Alsharafi</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.4</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jan 2024 07:00:50 +0300</lastBuildDate><atom:link href="https://amjad.alsharafi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jan 2024 07:00:50 +0300</lastBuildDate>
+    <atom:link href="https://amjad.alsharafi.dev/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WGMY2023 - Forensics - can&#39;t snoop</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</link>
       <pubDate>Sun, 07 Jan 2024 07:00:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</guid>
       <description>Writeup of the forensics challenge &amp;#34;can&amp;#39;t snoop&amp;#34; in WGMY2023</description>
     </item>
-    
     <item>
       <title>Operating System - Spinlocks</title>
       <link>https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/</link>
       <pubDate>Sun, 03 Dec 2023 05:00:00 +0800</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/</guid>
       <description>Talking about implementing spinlocks safely with Rust in an operating system</description>
     </item>
-    
     <item>
       <title>WGMY2020 - Forensic - Lord Kiske&#39;s Server</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</link>
       <pubDate>Mon, 07 Dec 2020 09:10:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</guid>
       <description>Writeup of the forensics challenges in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - misc - Defuse The Bomb!</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</link>
       <pubDate>Sun, 06 Dec 2020 20:40:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</guid>
       <description>Writeup of the misc challenge Defuse The Bomb! in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - Crypto - babyrsa</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</link>
       <pubDate>Sun, 06 Dec 2020 20:30:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</guid>
       <description>Writeup of the crypto challenge babyrsa in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - Mobile - SpeedyQuizy</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</link>
       <pubDate>Sun, 06 Dec 2020 11:30:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</guid>
       <description>Writeup of the mobile challenge SpeedyQuizy in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - kmum</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</link>
       <pubDate>Sun, 06 Dec 2020 09:15:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</guid>
       <description>Writeup of the reversing challenge kmum in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - Senang</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</link>
       <pubDate>Sun, 06 Dec 2020 07:31:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</guid>
       <description>Writeup of the reversing challenge Senang in WGMY2020</description>
     </item>
-    
     <item>
       <title>WGMY2020 - RE - babyrev</title>
       <link>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</link>
       <pubDate>Sun, 06 Dec 2020 07:00:50 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</guid>
       <description>Writeup of the reversing challenge bebyrev in WGMY2020</description>
     </item>
-    
     <item>
       <title>codeit</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</link>
       <pubDate>Wed, 21 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</guid>
       <description>Writeup of 6_-_codeit, the sixth challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>TKApp</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</guid>
       <description>Writeup of 5_-_TKApp, the fifth challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>report</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</link>
       <pubDate>Wed, 14 Oct 2020 03:00:00 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</guid>
       <description>Writeup of 4_-_report, the fourth challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>wednesday</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</link>
       <pubDate>Wed, 14 Oct 2020 02:00:00 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</guid>
       <description>Writeup of 3_-_wednesday, the third challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>garbage</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</link>
       <pubDate>Wed, 14 Oct 2020 01:00:00 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</guid>
       <description>Writeup of 2_-_garbage, the second challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>fidler</title>
       <link>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</link>
       <pubDate>Wed, 14 Oct 2020 00:00:00 +0300</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</guid>
       <description>Writeup of 1_-_fidler, the first challenge in FlareOn7</description>
     </item>
-    
     <item>
       <title>About</title>
       <link>https://amjad.alsharafi.dev/en/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/about/</guid>
-      <description>Hello, I&amp;rsquo;m Amjad Alsharafi.
-I&amp;rsquo;m a software engineer, and malware researcher.
-Please checkout my cv.
-I also enjoy:
-programming especially low-level/performance stuff like emulators and OSes. CTFs, I mostly do reverse :D Chess. Look at my projects to see what I have been working on.
-Contacts You can contact me through:
-Twitter/X Linkedin Email </description>
+      <description>&lt;p&gt;Hello, I&amp;rsquo;m Amjad Alsharafi.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m a software engineer, and malware researcher.&lt;/p&gt;
+&lt;p&gt;Please checkout my &lt;a href=&#34;https://amjad.alsharafi.dev/cv.pdf&#34;&gt;cv&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also enjoy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;programming especially low-level/performance stuff like emulators and OSes.&lt;/li&gt;
+&lt;li&gt;CTFs, I mostly do reverse :D&lt;/li&gt;
+&lt;li&gt;Chess.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Look at my &lt;a href=&#34;https://amjad.alsharafi.dev/en/projects/&#34;&gt;projects&lt;/a&gt; to see what I have been working on.&lt;/p&gt;
+&lt;h2 id=&#34;contacts&#34;&gt;Contacts&lt;/h2&gt;
+&lt;p&gt;You can contact me through:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://x.com/AmjadAlsharafi5&#34;&gt;Twitter/X&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/amjad-alshrarafi-346956b2&#34;&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;mailto:me@amjad.alsharafi.dev&#34;&gt;Email&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>Projects</title>
       <link>https://amjad.alsharafi.dev/en/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://amjad.alsharafi.dev/en/projects/</guid>
       <description>Most important projects I worked on or been part of in all my experiences.</description>
     </item>
-    
   </channel>
 </rss>
