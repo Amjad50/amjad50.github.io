@@ -26,13 +26,16 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.120.1'
+          hugo-version: '0.139.4'
           extended: true
 
       - name: Build site
         run: hugo --minify
+
+      - name: Copy 404 page
+        run: cp public/en/404.html public/404.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
