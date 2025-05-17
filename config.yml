@@ -55,14 +55,10 @@ params:
   
 
   socialIcons:
-    - name: twitter
-      url: "https://twitter.com/AmjadAlsharafi5"
     - name: linkedin
       url: "https://www.linkedin.com/in/amjad-alshrarafi-346956b2/"
     - name: github
       url: "https://github.com/Amjad50"
-    - name: cv
-      url: /cv.pdf
     - name: rss
       url: "index.xml"
   editPost:
