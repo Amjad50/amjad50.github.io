@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>أمجد الشرفي</title>
-    <link>https://amjad.alsharafi.dev/ar/</link>
+    <link>https://amsh.dev/ar/</link>
     <description>Recent content on أمجد الشرفي</description>
     <generator>Hugo -- 0.139.4</generator>
     <language>ar</language>
     <lastBuildDate>Tue, 05 Dec 2023 09:00:00 +0800</lastBuildDate>
-    <atom:link href="https://amjad.alsharafi.dev/ar/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://amsh.dev/ar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>نظام التشغيل - القفل الدوراني</title>
-      <link>https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/</link>
+      <link>https://amsh.dev/ar/posts/operating-system/spinlocks/</link>
       <pubDate>Sun, 03 Dec 2023 05:00:00 +0800</pubDate>
-      <guid>https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/</guid>
+      <guid>https://amsh.dev/ar/posts/operating-system/spinlocks/</guid>
       <description>الحديث عن تنفيذ القفل الدوراني بشكل آمن باستخدام لغة Rust في نظام تشغيل</description>
     </item>
     <item>
       <title>عن</title>
-      <link>https://amjad.alsharafi.dev/ar/about/</link>
+      <link>https://amsh.dev/ar/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://amjad.alsharafi.dev/ar/about/</guid>
+      <guid>https://amsh.dev/ar/about/</guid>
       <description>&lt;p&gt;مرحبًا، أنا أمجد الشرافي.&lt;/p&gt;
 &lt;p&gt;أنا مهندس برمجيات وباحث في البرمجيات الخبيثة.&lt;/p&gt;
 &lt;p&gt;كما أستمتع بـ:&lt;/p&gt;
@@ -28,7 +28,7 @@
 &lt;li&gt;مسابقات التحديات السيبرانية، أقوم بالهندسة العكسية في الغالب.&lt;/li&gt;
 &lt;li&gt;الشطرنج.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;شاهد مشاريعي على &lt;a href=&#34;https://amjad.alsharafi.dev/ar/projects/&#34;&gt;مشاريعي&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;شاهد مشاريعي على &lt;a href=&#34;https://amsh.dev/ar/projects/&#34;&gt;مشاريعي&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;جهات-الاتصال&#34;&gt;جهات الاتصال&lt;/h2&gt;
 &lt;p&gt;يمكنك الاتصال بي عبر:&lt;/p&gt;
 &lt;ul&gt;
@@ -38,9 +38,9 @@
     </item>
     <item>
       <title>مشاريع</title>
-      <link>https://amjad.alsharafi.dev/ar/projects/</link>
+      <link>https://amsh.dev/ar/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://amjad.alsharafi.dev/ar/projects/</guid>
+      <guid>https://amsh.dev/ar/projects/</guid>
       <description>أهم المشاريع التي عملت عليها أو شاركت فيها في جميع تجاربي.</description>
     </item>
   </channel>

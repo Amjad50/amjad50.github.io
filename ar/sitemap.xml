@@ -2,125 +2,125 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://amjad.alsharafi.dev/ar/tags/rust/</loc>
+    <loc>https://amsh.dev/ar/tags/rust/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/tags/rust/"
+                href="https://amsh.dev/en/tags/rust/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/tags/rust/"
+                href="https://amsh.dev/ar/tags/rust/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/</loc>
+    <loc>https://amsh.dev/ar/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/"
+                href="https://amsh.dev/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/"
+                href="https://amsh.dev/ar/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/tags/</loc>
+    <loc>https://amsh.dev/ar/tags/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/tags/"
+                href="https://amsh.dev/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/tags/"
+                href="https://amsh.dev/ar/tags/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/series/%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D9%86%D8%B8%D9%85-%D8%A7%D9%84%D8%AA%D8%B4%D8%BA%D9%8A%D9%84/</loc>
+    <loc>https://amsh.dev/ar/series/%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D9%86%D8%B8%D9%85-%D8%A7%D9%84%D8%AA%D8%B4%D8%BA%D9%8A%D9%84/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/series/</loc>
+    <loc>https://amsh.dev/ar/series/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/series/"
+                href="https://amsh.dev/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/series/"
+                href="https://amsh.dev/ar/series/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/posts/</loc>
+    <loc>https://amsh.dev/ar/posts/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/posts/"
+                href="https://amsh.dev/en/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/posts/"
+                href="https://amsh.dev/ar/posts/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/</loc>
+    <loc>https://amsh.dev/ar/posts/operating-system/spinlocks/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/"
+                href="https://amsh.dev/en/posts/operating-system/spinlocks/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/"
+                href="https://amsh.dev/ar/posts/operating-system/spinlocks/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/tags/%D9%86%D8%B8%D8%A7%D9%85-%D8%AA%D8%B4%D8%BA%D9%8A%D9%84/</loc>
+    <loc>https://amsh.dev/ar/tags/%D9%86%D8%B8%D8%A7%D9%85-%D8%AA%D8%B4%D8%BA%D9%8A%D9%84/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/categories/</loc>
+    <loc>https://amsh.dev/ar/categories/</loc>
     <lastmod>2020-10-29T09:39:43+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/categories/"
+                href="https://amsh.dev/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/categories/"
+                href="https://amsh.dev/ar/categories/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/about/</loc>
+    <loc>https://amsh.dev/ar/about/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/about/"
+                href="https://amsh.dev/en/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/about/"
+                href="https://amsh.dev/ar/about/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/ar/projects/</loc>
+    <loc>https://amsh.dev/ar/projects/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/projects/"
+                href="https://amsh.dev/en/projects/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/projects/"
+                href="https://amsh.dev/ar/projects/"
                 />
   </url>
 </urlset>

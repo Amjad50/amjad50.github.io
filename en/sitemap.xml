@@ -2,208 +2,208 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://amjad.alsharafi.dev/en/</loc>
+    <loc>https://amsh.dev/en/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/"
+                href="https://amsh.dev/ar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/"
+                href="https://amsh.dev/en/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/</loc>
+    <loc>https://amsh.dev/en/posts/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/posts/"
+                href="https://amsh.dev/ar/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/posts/"
+                href="https://amsh.dev/en/posts/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/</loc>
+    <loc>https://amsh.dev/en/series/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/series/"
+                href="https://amsh.dev/ar/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/series/"
+                href="https://amsh.dev/en/series/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/</loc>
+    <loc>https://amsh.dev/en/tags/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/tags/"
+                href="https://amsh.dev/ar/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/tags/"
+                href="https://amsh.dev/en/tags/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2024-writeups/</loc>
+    <loc>https://amsh.dev/en/series/wargames-malaysia-2024-writeups/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/wgmy2024/</loc>
+    <loc>https://amsh.dev/en/tags/wgmy2024/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2024/virtualbox/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2024/virtualbox/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/writeup/</loc>
+    <loc>https://amsh.dev/en/tags/writeup/</loc>
     <lastmod>2025-01-01T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2023-writeups/</loc>
+    <loc>https://amsh.dev/en/series/wargames-malaysia-2023-writeups/</loc>
     <lastmod>2024-01-07T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/wgmy2023/</loc>
+    <loc>https://amsh.dev/en/tags/wgmy2023/</loc>
     <lastmod>2024-01-07T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2023/cant_snoop/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2023/cant_snoop/</loc>
     <lastmod>2024-01-07T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/operating-system/</loc>
+    <loc>https://amsh.dev/en/tags/operating-system/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/</loc>
+    <loc>https://amsh.dev/en/posts/operating-system/spinlocks/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/posts/operating-system/spinlocks/"
+                href="https://amsh.dev/ar/posts/operating-system/spinlocks/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/posts/operating-system/spinlocks/"
+                href="https://amsh.dev/en/posts/operating-system/spinlocks/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/operating-system-development/</loc>
+    <loc>https://amsh.dev/en/series/operating-system-development/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/rust/</loc>
+    <loc>https://amsh.dev/en/tags/rust/</loc>
     <lastmod>2023-12-05T09:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/tags/rust/"
+                href="https://amsh.dev/ar/tags/rust/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/tags/rust/"
+                href="https://amsh.dev/en/tags/rust/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/wargames-malaysia-2020-writeups/</loc>
+    <loc>https://amsh.dev/en/series/wargames-malaysia-2020-writeups/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/wgmy2020/</loc>
+    <loc>https://amsh.dev/en/tags/wgmy2020/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/forensics/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/forensics/</loc>
     <lastmod>2020-12-07T09:10:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/bomb/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/bomb/</loc>
     <lastmod>2020-12-06T20:40:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrsa/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/babyrsa/</loc>
     <lastmod>2020-12-06T20:30:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/speedyquizy/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/speedyquizy/</loc>
     <lastmod>2020-12-06T11:30:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/kmum/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/kmum/</loc>
     <lastmod>2020-12-06T09:15:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/senang/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/senang/</loc>
     <lastmod>2020-12-06T07:31:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/wgmy2020/babyrev/</loc>
+    <loc>https://amsh.dev/en/posts/wgmy2020/babyrev/</loc>
     <lastmod>2020-12-06T07:00:50+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/autoit3/</loc>
+    <loc>https://amsh.dev/en/tags/autoit3/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/6_-_codeit/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/6_-_codeit/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/flareon7/</loc>
+    <loc>https://amsh.dev/en/tags/flareon7/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/series/flareon7-writeups/</loc>
+    <loc>https://amsh.dev/en/series/flareon7-writeups/</loc>
     <lastmod>2020-10-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/c%23/</loc>
+    <loc>https://amsh.dev/en/tags/c%23/</loc>
     <lastmod>2020-10-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/5_-_tkapp/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/5_-_tkapp/</loc>
     <lastmod>2020-10-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/document-malware/</loc>
+    <loc>https://amsh.dev/en/tags/document-malware/</loc>
     <lastmod>2020-10-14T03:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/4_-_report/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/4_-_report/</loc>
     <lastmod>2020-10-14T03:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/tags/nimlang/</loc>
+    <loc>https://amsh.dev/en/tags/nimlang/</loc>
     <lastmod>2020-10-14T02:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/3_-_wednesday/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/3_-_wednesday/</loc>
     <lastmod>2020-10-14T02:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/2_-_garbage/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/2_-_garbage/</loc>
     <lastmod>2020-10-14T01:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/posts/flareon7/1_-_fidler/</loc>
+    <loc>https://amsh.dev/en/posts/flareon7/1_-_fidler/</loc>
     <lastmod>2020-10-14T00:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/about/</loc>
+    <loc>https://amsh.dev/en/about/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/about/"
+                href="https://amsh.dev/ar/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/about/"
+                href="https://amsh.dev/en/about/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/categories/</loc>
+    <loc>https://amsh.dev/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/categories/"
+                href="https://amsh.dev/ar/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/categories/"
+                href="https://amsh.dev/en/categories/"
                 />
   </url><url>
-    <loc>https://amjad.alsharafi.dev/en/projects/</loc>
+    <loc>https://amsh.dev/en/projects/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://amjad.alsharafi.dev/ar/projects/"
+                href="https://amsh.dev/ar/projects/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://amjad.alsharafi.dev/en/projects/"
+                href="https://amsh.dev/en/projects/"
                 />
   </url>
 </urlset>
